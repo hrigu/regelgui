@@ -7,7 +7,8 @@ class RegelnController < ApplicationController
       format.html #intex.html.erb
       format.json {
         @regeln = Regel.all
-        render json: @regeln }
+        render json: @regeln
+      }
     end
   end
 

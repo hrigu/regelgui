@@ -13,11 +13,18 @@ class Seed < ActiveRecord::Migration
       Variable.create(name: k)
     end
 
+    ### Regel mit Konfiguration
     #Regeln
     r = RegelMitZeitfenster.create(name: "Möglichst 2 D1", ist_aktiv: true, zeitfenster: 1, grenze_minimum: 3, variable: Variable.where(name: "Anzahl D1").first)
-
     #Konfigurationen
     PositionKonfiguration.create(gruenorangerot_position: 1000, regel: r, mitarbeiter: [Mitarbeiter.first, Mitarbeiter.all[2]])
+
+    ### Regel ohne Konfiguration
+    #Regeln
+    r = RegelMitZeitfenster.create(name: "Möglichst 2 D1 hintereinander", ist_aktiv: true, zeitfenster: 1, grenze_minimum: 3, variable: Variable.where(name: "Anzahl D1").first)
+    ##Konfigurationen
+    #PositionKonfiguration.create(gruenorangerot_position: 1000, regel: r, mitarbeiter: [Mitarbeiter.first, Mitarbeiter.all[2]])
+
 
   end
 
