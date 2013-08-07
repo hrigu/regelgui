@@ -11,9 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807114309) do
+ActiveRecord::Schema.define(:version => 20130807120230) do
 
-  create_table "konfiguration_mitarbeiter", :force => true do |t|
+  create_table "konfigurationen", :force => true do |t|
+    t.integer  "gruen1"
+    t.integer  "orange1"
+    t.integer  "rot1"
+    t.integer  "gruen2"
+    t.integer  "orange2"
+    t.integer  "rot2"
+    t.integer  "gruenorangerot_position"
+    t.string   "type"
+    t.integer  "regel_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  create_table "konfigurationen_mitarbeiter", :force => true do |t|
     t.integer "konfiguration_id"
     t.integer "mitarbeiter_id"
   end

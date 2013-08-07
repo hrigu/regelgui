@@ -1,0 +1,3 @@
+class PositionKonfiguration < Konfiguration
+
+end

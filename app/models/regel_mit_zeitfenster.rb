@@ -1,0 +1,3 @@
+class RegelMitZeitfenster < Regel
+
+end

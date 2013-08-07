@@ -13,13 +13,10 @@ class CreateKonfigurationen < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-
-  def change
-    create_table :konfiguration_mitarbeiter do |t|
+    create_table :konfigurationen_mitarbeiter do |t|
       t.belongs_to :konfiguration
       t.belongs_to :mitarbeiter
     end
-  end
 
+  end
 end
