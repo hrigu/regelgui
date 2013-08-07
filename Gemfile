@@ -17,7 +17,9 @@ gem 'simple_form'
 gem 'thin'
 group :assets do
   gem 'therubyracer', :platform=>:ruby
+  gem 'eco'                       # javascript template engine. Wird mit spine.js gebraucht
 end
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]

@@ -13,4 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+
+//Spinejs
+//= require partial_helper
+//= require spine/spine
+//= require spine/route
+//= require spine/ajax
+//= require spine/manager
+
 //= require_tree .
