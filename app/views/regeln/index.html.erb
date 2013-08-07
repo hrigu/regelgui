@@ -1,0 +1,17 @@
+<h3>Regeln</h3>
+<div class="span8">
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @regeln.each do |regel| %>
+    <tr>
+      <td><%= link_to regel.name, regel_path(regel) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
