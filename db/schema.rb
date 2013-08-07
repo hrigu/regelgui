@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806091528) do
+ActiveRecord::Schema.define(:version => 20130807114309) do
+
+  create_table "konfiguration_mitarbeiter", :force => true do |t|
+    t.integer "konfiguration_id"
+    t.integer "mitarbeiter_id"
+  end
+
+  create_table "mitarbeiter", :force => true do |t|
+    t.string   "kuerzel"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "regeln", :force => true do |t|
+    t.string   "name"
+    t.integer  "zeitfenster"
+    t.integer  "grenze_maximum"
+    t.integer  "grenze_minimum"
+    t.boolean  "ist_aktiv"
+    t.string   "kommentar"
+    t.string   "type"
+    t.integer  "variable_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -49,5 +73,11 @@ ActiveRecord::Schema.define(:version => 20130806091528) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "variablen", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
