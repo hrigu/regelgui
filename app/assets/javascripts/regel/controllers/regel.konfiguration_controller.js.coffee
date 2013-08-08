@@ -6,6 +6,10 @@ class regel.KonfigurationController extends Spine.Controller
     ".slider": "slider"
     ".mitarbeiterliste": "mitarbeiter_container"
     ".feedback": "feedback_element"
+    ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
+
+#  events:
+#    "click .btn-mitarbeiter-hinzufuegen": "mitarbeiter_hinzufuegen"
 
   constructor: (options)->
     super(options)
@@ -22,6 +26,8 @@ class regel.KonfigurationController extends Spine.Controller
     @replace(html)
     @initialize_grafik()
     @initialize_mitarbeiter()
+
+    @btn_mitarbeiter_hinzufuegen.popover()
     @
 
   initialize_grafik: () ->
@@ -45,6 +51,12 @@ class regel.KonfigurationController extends Spine.Controller
       c.render()
       @mitarbeiter_container.append(c.el)
 
-  release :() ->
+  release: () ->
     mc.release() for mc in @mitarbeiter_controllers
     super
+
+  mitarbeiter_hinzufuegen: () ->
+#    cc = "<div> hi</div>"
+#    @mitarbeiter_container.popover(
+#      {html: true, content: cc, placement: "left", trigger: "click", delay: {show: 500, hide: 0}}
+#    )

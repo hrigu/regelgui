@@ -7,6 +7,8 @@
     <div class="span4">
         <div class="mitarbeiterliste"></div>
     </div>
-    <div class="span1">Tools</div>
+    <div class="span1">
+        <Button class="btn btn-mitarbeiter-hinzufuegen" data-toggle="popover" title="" data-placement="left" data-content="content" data-original-title="A Title">Mitarbeiter hinzufügen</Button>
+    </div>
 </div>
 

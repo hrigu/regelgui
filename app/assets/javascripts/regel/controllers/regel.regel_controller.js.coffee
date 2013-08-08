@@ -12,6 +12,7 @@ class regel.RegelController extends Spine.Controller
     ".collapse": "collapse"
     ".konfigurationen": "konfigurationen"
     ".btn-toggle-status": "toggle_status_button"
+
   events:
     "click .titel": "toggle_content"
     "show .collapse": "show_content"
@@ -39,14 +40,16 @@ class regel.RegelController extends Spine.Controller
 
 
   show_content: (arg) ->
-    @render_konfigurationen()
+    if $(arg.target).hasClass('collapse')   #Damit nicht der show event des popovers reinspielt
+      @render_konfigurationen()
 
   ###
   released alle KonfigurationsController
   ###
   release_content: (arg) ->
-    for c in @konfiguration_controllers
-      c.release()
+    if $(arg.target).hasClass('collapse')   #Damit nicht der show event des popovers reinspielt
+      for c in @konfiguration_controllers
+        c.release()
 
   #private
   render_konfigurationen: () =>
