@@ -1,4 +1,4 @@
 <div id="konfiguration<%= @id %>">
-    konfiguration
+    <%= @type_as_string()  %>
 </div>
 

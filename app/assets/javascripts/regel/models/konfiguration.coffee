@@ -5,6 +5,8 @@ unless window.regel
 Das Regel-Modell.
 ###
 class regel.Konfiguration extends Spine.Model
+  type_as_string: () ->
+    @constructor.name
 
 class regel.PositionKonfiguration extends regel.Konfiguration
   @configure "PositionKonfiguration", "id", "name", "regel_id"

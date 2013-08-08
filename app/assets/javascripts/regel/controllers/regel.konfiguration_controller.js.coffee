@@ -6,6 +6,6 @@ class regel.KonfigurationController extends Spine.Controller
     super(options)
 
   render: () ->
-    html = JST['regel/views/konfiguration'](@item)
+    html = JST["regel/views/#{@item.type_as_string().toLowerCase()}"](@item)
     @replace(html)
     @
