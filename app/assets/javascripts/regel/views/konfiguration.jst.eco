@@ -1,0 +1,4 @@
+<div id="konfiguration<%= @id %>">
+    konfiguration
+</div>
+

@@ -13,6 +13,7 @@ class regel.Builder
   initialisieren: () ->
     new regel.RegelseiteController(el: "#regelseite").render()
     regel.Regel.fetch()
+    regel.PositionKonfiguration.fetch()
 #    gr.Variable.fetch()
 #    gr.Mitarbeiter.fetch()
 #    gr.MitarbeiterGruenorangerot.fetch()

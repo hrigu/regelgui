@@ -9,7 +9,10 @@
     </div>
     <div class="accordion-body collapse">
         <div class="accordion-inner">
-            <p>Der richtige Content wird beim Aufklappen per JS eingefügt</p>
+            <div>
+                <div class="regel-content">regelcontent</div>
+                <div class="konfigurationen">konfigurationen</div>
+            </div>
         </div>
     </div>
 </div>

@@ -21,3 +21,7 @@ class regel.Regel extends Spine.Model
 
   status_change_msg: ->
     if @ist_aktiv then "deaktivieren" else "aktivieren"
+
+
+  konfigurationen: ->
+    regel.PositionKonfiguration.select((k) => k.regel_id == @id)
