@@ -1,2 +1,9 @@
-zur Zeit nicht benutzt
+<div id="konfiguration<%= @id %>"> <!--TODO Regelgui: Warum kann man hier nur 11 Grideinheiten vergeben?-->
+    <div class="span4">
+        <div class="slider"></div>
+    </div>
+    <div class="span2">Text</div>
+    <div class="span4">Mitarbeiter</div>
+    <div class="span1">Tools</div>
+</div>
 

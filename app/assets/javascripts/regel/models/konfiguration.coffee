@@ -9,7 +9,7 @@ class regel.Konfiguration extends Spine.Model
     @constructor.name
 
 class regel.PositionKonfiguration extends regel.Konfiguration
-  @configure "PositionKonfiguration", "id", "name", "regel_id"
+  @configure "PositionKonfiguration", "id", "name", "gruenorangerot_position_100", "regel_id"
   @extend Spine.Model.Ajax
 
   @url: ->

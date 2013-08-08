@@ -1,4 +1,1 @@
-<div id="konfiguration<%= @id %>">
-    <%= @type_as_string()  %>
-</div>
-
+zur Zeit nicht benutzt
