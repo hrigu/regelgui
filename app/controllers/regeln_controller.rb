@@ -12,6 +12,12 @@ class RegelnController < ApplicationController
     end
   end
 
+  def update
+    regel = Regel.find(params[:id])
+    regel.update_attributes(params[:regel])
+    respond_with regel
+  end
+
 end
 
 

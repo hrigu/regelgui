@@ -11,10 +11,12 @@ class regel.RegelController extends Spine.Controller
   elements:
     ".collapse": "collapse"
     ".konfigurationen": "konfigurationen"
+    ".btn-toggle-status": "toggle_status_button"
   events:
     "click .titel": "toggle_content"
     "show .collapse": "show_content"
     "hide .collapse": "release_content"
+    "click .btn-toggle-status": "toggle_status"
 
   constructor: (options)->
     super(options)
@@ -27,6 +29,14 @@ class regel.RegelController extends Spine.Controller
 
   toggle_content: (arg) ->
     @collapse.collapse('toggle')
+
+  toggle_status: (arg) ->
+    @el.removeClass(@item.status())
+    @item.toggle_status()
+    @toggle_status_button.text(@item.status_change_msg())
+    @el.addClass(@item.status())
+
+
 
   show_content: (arg) ->
     @render_konfigurationen()

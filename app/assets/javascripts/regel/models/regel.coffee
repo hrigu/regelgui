@@ -15,6 +15,10 @@ class regel.Regel extends Spine.Model
     Routes.regel_path(@id)#"regel/#{@id}"
 
 
+  toggle_status: () ->
+    @ist_aktiv = !@ist_aktiv
+    @save()
+
   status: ->
     if @ist_aktiv then "aktiv" else "inaktiv"
 
