@@ -15,4 +15,4 @@ class regel.Variable extends Spine.Model
     Routes.regel_variablen_path()
 
   url: (options)->
-    Routes.regel_variable_path(@id )
+    Routes.regel_variable_path(@id)

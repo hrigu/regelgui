@@ -41,17 +41,20 @@ class regel.RegelController extends Spine.Controller
   show_content: (arg) ->
     @render_konfigurationen()
 
+  ###
+  released alle KonfigurationsController
+  ###
   release_content: (arg) ->
-    for c in @konfiguration_kontroller
+    for c in @konfiguration_controllers
       c.release()
 
   #private
   render_konfigurationen: () =>
-    @konfiguration_kontroller = []
+    @konfiguration_controllers = []
     konfigurationen = @item.konfigurationen()
     for konfiguration in konfigurationen
       c = new regel.KonfigurationController(item: konfiguration)
-      @konfiguration_kontroller.push c
+      @konfiguration_controllers.push c
       c.render()
       @konfigurationen.append(c.el)
 

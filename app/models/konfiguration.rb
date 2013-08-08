@@ -3,4 +3,9 @@ class Konfiguration < ActiveRecord::Base
 
   belongs_to :regel
   has_and_belongs_to_many :mitarbeiter
+
+  def mitarbeiter_ids
+    mitarbeiter.map(&:id)
+  end
+
 end

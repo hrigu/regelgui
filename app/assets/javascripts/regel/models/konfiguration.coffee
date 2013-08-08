@@ -9,7 +9,7 @@ class regel.Konfiguration extends Spine.Model
     @constructor.name
 
 class regel.PositionKonfiguration extends regel.Konfiguration
-  @configure "PositionKonfiguration", "id", "name", "gruenorangerot_position_100", "regel_id"
+  @configure "PositionKonfiguration", "id", "name", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids"
   @extend Spine.Model.Ajax
 
   @url: ->
@@ -17,4 +17,9 @@ class regel.PositionKonfiguration extends regel.Konfiguration
 
   url: (options)->
     Routes.position_konfiguration_path(@id)#"regel/#{@id}"
+
+
+  mitarbeiter: ->
+   @mitarbeiter_ids.map (id) -> regel.Mitarbeiter.find(id)
+
 

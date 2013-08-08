@@ -1,0 +1,4 @@
+<div id="mitarbeiter<%= @id %>" class="mitarbeiter">
+    <%= @kuerzel %>
+</div>
+

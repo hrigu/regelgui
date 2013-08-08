@@ -12,7 +12,6 @@ class regel.Mitarbeiter extends Spine.Model
   Unter dieser URL sind die Absenzen als JSON abholbar
   ###
   @url: ->
-    debugger
     Routes.mitarbeiter_index_path()
 
   url: (options)->

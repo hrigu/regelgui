@@ -4,8 +4,8 @@ class regel.KonfigurationController extends Spine.Controller
 
   elements:
     ".slider": "slider"
+    ".mitarbeiterliste": "mitarbeiter_container"
     ".feedback": "feedback_element"
-
 
   constructor: (options)->
     super(options)
@@ -17,17 +17,15 @@ class regel.KonfigurationController extends Spine.Controller
         @feedback_element.fadeTo("fast", 1)
       );
 
-
   render: () ->
     html = JST["regel/views/#{@item.type_as_string().toLowerCase()}"](@item)
     @replace(html)
     @initialize_grafik()
+    @initialize_mitarbeiter()
     @
-
 
   initialize_grafik: () ->
     @slider.slider({
-      #regel_id: regel.id,
       min: 0,
       max: 100,
       range: "min",
@@ -37,3 +35,16 @@ class regel.KonfigurationController extends Spine.Controller
       stop: (event, ui) =>
         @item.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
     })
+
+  initialize_mitarbeiter: () ->
+    @mitarbeiter_controllers = []
+    mitarbeiter = @item.mitarbeiter()
+    for ma in mitarbeiter
+      c = new regel.MitarbeiterController(item: ma)
+      @mitarbeiter_controllers.push c
+      c.render()
+      @mitarbeiter_container.append(c.el)
+
+  release :() ->
+    mc.release() for mc in @mitarbeiter_controllers
+    super
