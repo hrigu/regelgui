@@ -14,6 +14,7 @@ class regel.Builder
     new regel.RegelseiteController(el: "#regelseite").render()
     regel.Regel.fetch()
     regel.PositionKonfiguration.fetch()
+    regel.Mitarbeiter.fetch()
 #    gr.Variable.fetch()
 #    gr.Mitarbeiter.fetch()
 #    gr.MitarbeiterGruenorangerot.fetch()
