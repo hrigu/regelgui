@@ -37,3 +37,5 @@ group :test do
   gem 'email_spec'
   gem 'launchy'
 end
+
+gem 'js-routes'                   # to make routes available in javascript https://github.com/railsware/js-routes

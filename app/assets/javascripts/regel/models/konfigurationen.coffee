@@ -9,10 +9,10 @@ class regel.Regel extends Spine.Model
   @extend Spine.Model.Ajax
 
   @url: ->
-    Routes.regeln_path()#"regeln"
+    "konfigurationen"
 
   url: (options)->
-    Routes.regel_path(@id)#"regel/#{@id}"
+    "regel/#{@id}"
 
 
   status: ->

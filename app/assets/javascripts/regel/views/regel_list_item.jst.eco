@@ -1,13 +1,13 @@
 <div id="regel<%= @id %>" class="accordion-group <%= @status() %>">
     <div class="accordion-heading row-fluid">
         <div class="span10">
-            <a class="titel accordion-toggle" data-parent="not_used" data-toggle="collapse" href="#panel<%= @id %>"><%=@name %></a>
+            <a class="titel accordion-toggle" href="#>"><%=@name %></a>
         </div>
         <div class="span2 tools text-right">
             <Button class="btn btn-toggle-status"><%= @status_change_msg()%></Button>
         </div>
     </div>
-    <div class="accordion-body collapse" id="panel<%= @id %>" data-id="<%= @id %>">
+    <div class="accordion-body collapse">
         <div class="accordion-inner">
             <p>Der richtige Content wird beim Aufklappen per JS eingefügt</p>
         </div>

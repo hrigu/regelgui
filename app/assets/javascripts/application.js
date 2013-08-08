@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 
+//= require js-routes
+
+
 //Spinejs
 //= require partial_helper
 //= require spine/spine

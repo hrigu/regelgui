@@ -1,11 +1,6 @@
 unless window.regel
   window.regel = {}
-#Namespace
-
-###
-  Controller für eine spezifische Regel
-###
-class regel.RegelController extends Spine.Controller
+class regel.KonfigurationController extends Spine.Controller
 
   elements:
     ".collapse": "collapse"
@@ -23,11 +18,7 @@ class regel.RegelController extends Spine.Controller
     @
 
   expand: (arg) ->
+    debugger
     html = JST['regel/views/regel_content'](@item)
     @regel_content.html(html)
-
-    #Die Konfiguration kommen hier her
-
-
-
     @collapse.collapse('toggle')
