@@ -9,9 +9,9 @@ class regel.KonfigurationController extends Spine.Controller
     ".mitarbeiterliste": "mitarbeiter_container"
     ".feedback": "feedback_element"
     ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
-
+    #".mitarbeiter": "alle_mitarbeiter"      geht nicht, da dynamisch erstellt
   events:
-    "click .btn-mitarbeiter-hinzufuegen": "mitarbeiter_auswahlfenster_oeffnen"
+    "click .btn-mitarbeiter-hinzufuegen": "alle_mitarbeiter_anzeigen"
 
   constructor: (options)->
     super(options)
@@ -28,7 +28,6 @@ class regel.KonfigurationController extends Spine.Controller
     @replace(html)
     @initialize_grafik()
     @initialize_mitarbeiter()
-    @initialize_add_mitarbeiter_popover()
     @
 
   initialize_grafik: () ->
@@ -45,41 +44,21 @@ class regel.KonfigurationController extends Spine.Controller
 
   initialize_mitarbeiter: () ->
     @mitarbeiter_controllers = []
-    mitarbeiter = @item.mitarbeiter()
-    @mitarbeiter_container.droppable({
-      drop: @mitarbeiter_hinzufuegen
-    })
+    mitarbeiter = @regel.alle_mitarbeiter()
     for ma in mitarbeiter
-      c = new regel.MitarbeiterController(item: ma)
+      c = new regel.MitarbeiterController(regel: @regel, konfiguration: @item, item: ma)
       @mitarbeiter_controllers.push c
       c.render()
       @mitarbeiter_container.append(c.el)
-
-  initialize_add_mitarbeiter_popover: () ->
-    @btn_mitarbeiter_hinzufuegen.popover(
-      title: "Mitarbeiter"
-      content: "replace"
-      placement: "left"
-      #container: "##{@el.attr('id')}"
-      container: "#regelseite"
-    )
-
 
   release: () ->
     mc.release() for mc in @mitarbeiter_controllers
     super
 
-  show_popover :() ->
 
-  mitarbeiter_auswahlfenster_oeffnen: () ->
-    html = JST["regel/views/add_mitarbeiter_popover"](@item)
-    $(".popover-content").html(html)
-    $( ".draggable" ).draggable();
+  alle_mitarbeiter_anzeigen: () ->
+    @alle_mitarbeiter.show()
 #    cc = "<div> hi</div>"
 #    @mitarbeiter_container.popover(
 #      {html: true, content: cc, placement: "left", trigger: "click", delay: {show: 500, hide: 0}}
 #    )
-
-  mitarbeiter_hinzufuegen:(event, ui) =>
-    mitarbeiter_id = ui.draggable.data("mitarbeiter-id");
-    @item.add_mitarbeiter(mitarbeiter_id)

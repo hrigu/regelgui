@@ -1,4 +1,6 @@
-<div id="mitarbeiter<%= @id %>" class="mitarbeiter">
-    <%= @kuerzel %>
+<div class="mitarbeiter <%=@css_class()%>">
+    <div class="content">
+        <%= @mitarbeiter.kuerzel %>
+    </div>
 </div>
 

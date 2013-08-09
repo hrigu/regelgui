@@ -1,8 +1,0 @@
-<div>
-    <% for mitarbeiter in @moegliche_mitarbeiter():%>
-        <div id="mitarbeiter<%= mitarbeiter.id %>" data-mitarbeiter-id="<%= mitarbeiter.id %>" class="draggable mitarbeiter">
-            <%= mitarbeiter.kuerzel %>
-        </div>
-    <% end %>
-</div>
-

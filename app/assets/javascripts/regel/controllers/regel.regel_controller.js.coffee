@@ -57,7 +57,7 @@ class regel.RegelController extends Spine.Controller
     @konfiguration_controllers = []
     konfigurationen = @item.konfigurationen()
     for konfiguration in konfigurationen
-      c = new regel.KonfigurationController(item: konfiguration)
+      c = new regel.KonfigurationController(regel: @item, item: konfiguration)
       @konfiguration_controllers.push c
       c.render()
       @konfigurationen.append(c.el)

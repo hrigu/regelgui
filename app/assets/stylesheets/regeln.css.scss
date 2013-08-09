@@ -15,14 +15,20 @@
     display: inline-block;
     padding: 0 0.2em;
     margin: 0.1em 0;
-    background: #E8F0FF;
     color: #000000;
     white: #FFF;
+    &.zugeordnet{
+      background: #E8F0FF;
+    }
+    &.frei{
+      background: #ffffff;
+    }
+
   }
 
   div .mitarbeiterliste{
     border: 1px solid #82A0B6;
-    width: 150px; height: 40px; padding: 0.5em;
+   // width: 150px; height: 40px; padding: 0.5em;
   }
   
   .popover{

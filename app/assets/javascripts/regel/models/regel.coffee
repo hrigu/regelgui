@@ -14,6 +14,9 @@ class regel.Regel extends Spine.Model
   url: (options)->
     Routes.regel_path(@id)#"regel/#{@id}"
 
+  alle_mitarbeiter: ()->
+    regel.Mitarbeiter.all()
+
 
   toggle_status: () ->
     @ist_aktiv = !@ist_aktiv
