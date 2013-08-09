@@ -25,6 +25,7 @@ class regel.RegelController extends Spine.Controller
 
   render: () ->
     html = JST['regel/views/regel'](@item)
+
     @replace(html)
     @
 

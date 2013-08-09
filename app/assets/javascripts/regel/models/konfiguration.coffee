@@ -8,6 +8,26 @@ class regel.Konfiguration extends Spine.Model
   type_as_string: () ->
     @constructor.name
 
+  moegliche_mitarbeiter: ->
+    #TODO regelgui: die Mitarbeiter welche in den anderen Konfigurationen auftauchen auch noch rausfiltern
+    regel.Mitarbeiter.all().filter((ma) => !@is_mitarbeiter_set(ma))
+
+  mitarbeiter: ->
+    @mitarbeiter_ids.map (id) -> regel.Mitarbeiter.find(id)
+
+  add_mitarbeiter: (mitarbeiter_id) ->
+    @mitarbeiter_ids.push mitarbeiter_id
+    @save()
+
+  #private
+  is_mitarbeiter_set: (m) ->
+    for id in @mitarbeiter_ids
+      return true if m.id == id
+    false
+
+
+
+
 class regel.PositionKonfiguration extends regel.Konfiguration
   @configure "PositionKonfiguration", "id", "name", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids"
   @extend Spine.Model.Ajax
@@ -17,9 +37,3 @@ class regel.PositionKonfiguration extends regel.Konfiguration
 
   url: (options)->
     Routes.position_konfiguration_path(@id)#"regel/#{@id}"
-
-
-  mitarbeiter: ->
-   @mitarbeiter_ids.map (id) -> regel.Mitarbeiter.find(id)
-
-
