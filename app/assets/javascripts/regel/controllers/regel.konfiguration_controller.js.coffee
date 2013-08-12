@@ -11,7 +11,7 @@ class regel.KonfigurationController extends Spine.Controller
     ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
     #".mitarbeiter": "alle_mitarbeiter"      geht nicht, da dynamisch erstellt
   events:
-    "click .btn-mitarbeiter-hinzufuegen": "alle_mitarbeiter_anzeigen"
+    "click .btn-mitarbeiter-hinzufuegen": "toggle_alle_mitarbeiter_anzeigen"
 
   constructor: (options)->
     super(options)
@@ -43,6 +43,8 @@ class regel.KonfigurationController extends Spine.Controller
     })
 
   initialize_mitarbeiter: () ->
+    @item.status = regel.Konfiguration.MITARBEITER_ANZEIGEN
+
     @mitarbeiter_controllers = []
     mitarbeiter = @regel.alle_mitarbeiter()
     for ma in mitarbeiter
@@ -55,10 +57,12 @@ class regel.KonfigurationController extends Spine.Controller
     mc.release() for mc in @mitarbeiter_controllers
     super
 
-
-  alle_mitarbeiter_anzeigen: () ->
-    @alle_mitarbeiter.show()
-#    cc = "<div> hi</div>"
-#    @mitarbeiter_container.popover(
-#      {html: true, content: cc, placement: "left", trigger: "click", delay: {show: 500, hide: 0}}
-#    )
+  toggle_alle_mitarbeiter_anzeigen: () ->
+    debugger
+    @item.toggle_status()
+    if (@item.is_status_mitarbeiter_bearbeiten())
+      this.mitarbeiter_container.children(".mitarbeiter.frei").show()
+      this.btn_mitarbeiter_hinzufuegen.text("Nur eigene Mitarbeitende anzeigen")
+    else
+      this.mitarbeiter_container.children(".mitarbeiter.frei").hide()
+      this.btn_mitarbeiter_hinzufuegen.text("Mitarbeitende hinzufügen")

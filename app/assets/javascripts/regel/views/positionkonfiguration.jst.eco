@@ -8,7 +8,7 @@
         <div class="mitarbeiterliste"></div>
     </div>
     <div class="span1">
-        <Button class="btn btn-mitarbeiter-hinzufuegen">Mitarbeiter hinzufügen</Button>
+        <Button class="btn btn-mitarbeiter-hinzufuegen">Mitarbeitende hinzufügen</Button>
     </div>
 </div>
 

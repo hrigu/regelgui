@@ -25,9 +25,10 @@ class regel.MitarbeiterController extends Spine.Controller
 
 
   clicked: (arg)->
-    if @konfiguration.is_mitarbeiter_set(@item)
-      @el.removeClass("zugeordnet").addClass("frei")
-      @konfiguration.remove_mitarbeiter(@item)
-    else
-      @el.removeClass("frei").addClass("zugeordnet")
-      @konfiguration.add_mitarbeiter(@item)
+    if @konfiguration.is_status_mitarbeiter_bearbeiten()
+      if @konfiguration.is_mitarbeiter_set(@item)
+        @el.removeClass("zugeordnet").addClass("frei")
+        @konfiguration.remove_mitarbeiter(@item)
+      else
+        @el.removeClass("frei").addClass("zugeordnet")
+        @konfiguration.add_mitarbeiter(@item)

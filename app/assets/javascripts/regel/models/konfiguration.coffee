@@ -5,6 +5,15 @@ unless window.regel
 Das Regel-Modell.
 ###
 class regel.Konfiguration extends Spine.Model
+
+  @MITARBEITER_ANZEIGEN = "mitarbeiter_anzeigen"
+  @MITARBEITER_BEARBEITEN = "mitarbeiter_bearbeiten"
+
+  constructor: ()->
+    @status = regel.Konfiguration.MITARBEITER_ANZEIGEN
+    super
+
+
   type_as_string: () ->
     @constructor.name
 
@@ -29,6 +38,16 @@ class regel.Konfiguration extends Spine.Model
     for id in @mitarbeiter_ids
       return true if m.id == id
     false
+
+  toggle_status: () ->
+    if(@status == regel.Konfiguration.MITARBEITER_BEARBEITEN)
+      @status = regel.Konfiguration.MITARBEITER_ANZEIGEN
+    else
+      @status = regel.Konfiguration.MITARBEITER_BEARBEITEN
+
+  is_status_mitarbeiter_bearbeiten: () ->
+    @status == regel.Konfiguration.MITARBEITER_BEARBEITEN
+
 
 class regel.PositionKonfiguration extends regel.Konfiguration
   @configure "PositionKonfiguration", "id", "name", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids"
