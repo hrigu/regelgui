@@ -58,7 +58,6 @@ class regel.KonfigurationController extends Spine.Controller
     super
 
   toggle_alle_mitarbeiter_anzeigen: () ->
-    debugger
     @item.toggle_status()
     if (@item.is_status_mitarbeiter_bearbeiten())
       this.mitarbeiter_container.children(".mitarbeiter.frei").show()
