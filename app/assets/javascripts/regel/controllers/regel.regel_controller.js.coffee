@@ -18,6 +18,7 @@ class regel.RegelController extends Spine.Controller
     "show .collapse": "show_content"
     "hide .collapse": "release_content"
     "click .btn-toggle-status": "toggle_status"
+    "click .btn-neue-onfiguration": "create_new_configuration"
 
   constructor: (options)->
     super(options)
@@ -38,12 +39,17 @@ class regel.RegelController extends Spine.Controller
     @toggle_status_button.text(@item.status_change_msg())
     @el.addClass(@item.status())
 
-
-
   show_content: (arg) ->
     if $(arg.target).hasClass('collapse')   #Damit nicht der show event des popovers reinspielt
       @render_konfigurationen()
 
+  create_new_configuration: (arg) ->
+    options = {}
+
+    c = new regel.NeueKonfigurationController()
+    c.render()
+    $("#myModal").html(c.el)
+    $("#myModal").modal("show")
   ###
   released alle KonfigurationsController
   ###
