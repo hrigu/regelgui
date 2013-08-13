@@ -21,6 +21,12 @@ class PositionKonfigurationenController < ApplicationController
     respond_with k
   end
 
+  def destroy
+    k = PositionKonfiguration.find(params[:id])
+    k.destroy()
+    respond_with k
+  end
+
 end
 
 

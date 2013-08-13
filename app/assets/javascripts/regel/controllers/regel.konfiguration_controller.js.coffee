@@ -12,6 +12,7 @@ class regel.KonfigurationController extends Spine.Controller
     #".mitarbeiter": "alle_mitarbeiter"      geht nicht, da dynamisch erstellt
   events:
     "click .btn-mitarbeiter-hinzufuegen": "toggle_alle_mitarbeiter_anzeigen"
+    "click .btn-loeschen": "konfiguration_loeschen"
 
   constructor: (options)->
     super(options)
@@ -66,3 +67,7 @@ class regel.KonfigurationController extends Spine.Controller
     else
       this.mitarbeiter_container.children(".mitarbeiter.frei").hide()
       this.btn_mitarbeiter_hinzufuegen.text("Mitarbeitende hinzufügen")
+
+  konfiguration_loeschen: ()->
+    @item.destroy()
+    @release()
