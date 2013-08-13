@@ -62,12 +62,15 @@ class regel.KonfigurationController extends Spine.Controller
   toggle_alle_mitarbeiter_anzeigen: () ->
     @item.toggle_status()
     if (@item.is_status_mitarbeiter_bearbeiten())
-      this.mitarbeiter_container.children(".mitarbeiter.frei").show()
+      this.mitarbeiter_container.children(".mitarbeiter").show()
       this.btn_mitarbeiter_hinzufuegen.text("Nur eigene Mitarbeitende anzeigen")
     else
       this.mitarbeiter_container.children(".mitarbeiter.frei").hide()
+      this.mitarbeiter_container.children(".mitarbeiter.anderer-konfiguration-zugeordnet").hide()
+
       this.btn_mitarbeiter_hinzufuegen.text("Mitarbeitende hinzufügen")
 
   konfiguration_loeschen: ()->
     @item.destroy()
+    #TODO die anderen Konfigurationen benachrichtigen, dass Mitarbeiter wieder frei sind.
     @release()

@@ -14,8 +14,19 @@ class regel.Regel extends Spine.Model
   url: (options)->
     Routes.regel_path(@id)#"regel/#{@id}"
 
+
+  ###
+  Alle Mitarbeiter, ob gesetzt oder nicht. (Fuer alle Regeln gleich)
+  ###
   alle_mitarbeiter: ()->
     regel.Mitarbeiter.all()
+
+
+  is_mitarbeiter_set: (m) ->
+    for konfiguration in @konfigurationen()
+      return true if konfiguration.is_mitarbeiter_set(m)
+    false
+
 
 
   toggle_status: () ->

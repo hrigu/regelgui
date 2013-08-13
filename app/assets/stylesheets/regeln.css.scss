@@ -26,8 +26,12 @@
     &.zugeordnet{
       background: #E8F0FF;
     }
+    &.anderer-konfiguration-zugeordnet{
+      background: #ffeaf2;
+    }
     &.frei{
       background: #ffffff;
     }
+
   }
 }

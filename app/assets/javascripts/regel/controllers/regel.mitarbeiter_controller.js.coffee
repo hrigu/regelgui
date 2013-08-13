@@ -12,6 +12,8 @@ class regel.MitarbeiterController extends Spine.Controller
   ###
   constructor: (options)->
     super(options)
+    regel.Mitarbeiter.bind("einer_konfiguration_hinzugefuegt", @mitarbeiter_wurde_einer_konfiguration_hinzugefuegt)
+    regel.Mitarbeiter.bind("einer_konfiguration_entfernt", @mitarbeiter_wurde_einer_konfiguration_entfernt)
 
 
   render: () ->
@@ -21,7 +23,11 @@ class regel.MitarbeiterController extends Spine.Controller
     @
 
   css_class: ()=>
-    if @konfiguration.is_mitarbeiter_set(@item) then "zugeordnet" else "frei"
+    css_class = switch
+      when @konfiguration.is_mitarbeiter_set(@item) then "zugeordnet"
+      when @regel.is_mitarbeiter_set(@item) then "anderer-konfiguration-zugeordnet"
+      else "frei"
+    css_class
 
 
   clicked: (arg)->
@@ -29,6 +35,25 @@ class regel.MitarbeiterController extends Spine.Controller
       if @konfiguration.is_mitarbeiter_set(@item)
         @el.removeClass("zugeordnet").addClass("frei")
         @konfiguration.remove_mitarbeiter(@item)
+        @item.trigger("einer_konfiguration_entfernt", regel: @regel, konfiguration: @konfiguration)
+      else if @el.hasClass("anderer-konfiguration-zugeordnet")
+        @el.removeClass("anderer-konfiguration-zugeordnet").addClass("zugeordnet")
+        @konfiguration.add_mitarbeiter(@item)
+        @item.trigger("einer_konfiguration_hinzugefuegt", regel: @regel, konfiguration: @konfiguration)
       else
         @el.removeClass("frei").addClass("zugeordnet")
         @konfiguration.add_mitarbeiter(@item)
+        @item.trigger("einer_konfiguration_hinzugefuegt", regel: @regel, konfiguration: @konfiguration)
+
+
+  mitarbeiter_wurde_einer_konfiguration_hinzugefuegt: (mitarbeiter, sonst) =>
+    if mitarbeiter.id == @item.id && sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
+      if @el.hasClass("zugeordnet")
+        @konfiguration.remove_mitarbeiter(@item)
+      @el.removeClass("frei").removeClass("zugeordnet").addClass("anderer-konfiguration-zugeordnet")
+      unless @konfiguration.is_status_mitarbeiter_bearbeiten()
+        @el.hide()
+
+  mitarbeiter_wurde_einer_konfiguration_entfernt: (mitarbeiter, sonst) =>
+    if mitarbeiter.id == @item.id && sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
+      @el.removeClass("frei").removeClass("anderer-konfiguration-zugeordnet").addClass("frei")
