@@ -5,9 +5,12 @@ unless window.regel
 ###
   Controller für das modale Fenster zum erstellen einer neuen Konfiguration
   el = #neue-konfiguration-erstellen
+  @regel
 ###
 class regel.NeueKonfigurationController extends Spine.Controller
 
+  elements:
+    "form": "formular"
   events:
     "click .btn-primary": "sichern"
     #"hidden #myModal": "fenster_schliessen"   #geht nicht, da #myModal kein Element dieser Konfiguration ist
@@ -28,4 +31,7 @@ class regel.NeueKonfigurationController extends Spine.Controller
 
 
   sichern: ()->
+    value = @formular.find(":checked").attr("value")
+    neue_konfiguration = new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 50)
+    neue_konfiguration.save()
     $("#myModal").modal("hide")

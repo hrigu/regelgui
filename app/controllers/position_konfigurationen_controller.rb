@@ -15,6 +15,12 @@ class PositionKonfigurationenController < ApplicationController
     respond_with p
   end
 
+  def create
+    k = PositionKonfiguration.new(params[:position_konfiguration])
+    k.save
+    respond_with k
+  end
+
 end
 
 

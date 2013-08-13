@@ -4,7 +4,7 @@ unless window.regel
 
 ###
   Controller für eine spezifische Regel
-  @this: Das regel.Regel Element
+  @item: Das regel.Regel Element
 ###
 class regel.RegelController extends Spine.Controller
 
@@ -46,7 +46,7 @@ class regel.RegelController extends Spine.Controller
   create_new_configuration: (arg) ->
     options = {}
 
-    c = new regel.NeueKonfigurationController()
+    c = new regel.NeueKonfigurationController(regel: @item)
     c.render()
     $("#myModal").html(c.el)
     $("#myModal").modal("show")
