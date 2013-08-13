@@ -22,7 +22,9 @@ class regel.RegelController extends Spine.Controller
 
   constructor: (options)->
     super(options)
+    @konfiguration_controllers = []
     regel.Regel.bind 'refresh', @render_regeln            # Nach jeder Aktion die Info neu rendern
+    regel.PositionKonfiguration.bind 'create', @render_konfiguration
 
   render: () ->
     html = JST['regel/views/regel'](@item)
@@ -50,6 +52,7 @@ class regel.RegelController extends Spine.Controller
     c.render()
     $("#myModal").html(c.el)
     $("#myModal").modal("show")
+
   ###
   released alle KonfigurationsController
   ###
@@ -60,11 +63,13 @@ class regel.RegelController extends Spine.Controller
 
   #private
   render_konfigurationen: () =>
-    @konfiguration_controllers = []
     konfigurationen = @item.konfigurationen()
     for konfiguration in konfigurationen
-      c = new regel.KonfigurationController(regel: @item, item: konfiguration)
-      @konfiguration_controllers.push c
-      c.render()
-      @konfigurationen.append(c.el)
+      @render_konfiguration(konfiguration)
 
+  #private
+  render_konfiguration:(konfiguration) =>
+    c = new regel.KonfigurationController(regel: @item, item: konfiguration)
+    @konfiguration_controllers.push c
+    c.render()
+    @konfigurationen.append(c.el)
