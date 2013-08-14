@@ -17,22 +17,25 @@ class regel.Konfiguration extends Spine.Model
   type_as_string: () ->
     @constructor.name
 
-#  moegliche_mitarbeiter: ->
-#    #TODO regelgui: die Mitarbeiter welche in den anderen Konfigurationen auftauchen auch noch rausfiltern
-#    regel.Mitarbeiter.all().filter((ma) => !@is_mitarbeiter_set(ma))
-
+  ###
+  die gesetzten Mitarbeiter
+  ###
   mitarbeiter: ->
     @mitarbeiter_ids.map (id) -> regel.Mitarbeiter.find(id)
 
+  regel: ->
+    regel.Regel.find(@regel_id)
 
   add_mitarbeiter: (mitarbeiter) ->
     @mitarbeiter_ids.push mitarbeiter.id
     @save()
+    @regel().trigger("mitarbeiteranzahl_geaendert")
 
   remove_mitarbeiter: (mitarbeiter) ->
     index = @mitarbeiter_ids.indexOf mitarbeiter.id
     @mitarbeiter_ids.splice(index, 1)
     @save()
+    @regel().trigger("mitarbeiteranzahl_geaendert")
 
   is_mitarbeiter_set: (m) ->
     for id in @mitarbeiter_ids

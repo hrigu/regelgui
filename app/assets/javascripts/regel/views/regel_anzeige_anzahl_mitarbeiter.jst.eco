@@ -1,0 +1,9 @@
+<div class="anzeige-anzahl-mitarbeiter">
+    <% if @summe_der_gesetzten_mitarbeiter() == 0: %>
+        Noch niemandem zugewiesen
+    <% else if @summe_der_gesetzten_mitarbeiter() == @summe_aller_mitarbeiter(): %>
+        Allen zugewiesen
+    <% else: %>
+        <%= @summe_der_gesetzten_mitarbeiter() %> von <%= @summe_aller_mitarbeiter() %> Mitarbeitende zugewiesen
+    <% end %>
+</div>

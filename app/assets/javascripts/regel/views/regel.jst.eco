@@ -1,7 +1,10 @@
 <div id="regel<%= @id %>" class="accordion-group <%= @status() %>">
     <div class="accordion-heading row-fluid">
-        <div class="span10">
+        <div class="span7">
             <a class="titel accordion-toggle" href="#>"><%=@name %></a>
+        </div>
+        <div class="span3">
+            <div class="anzeige-anzahl-mitarbeiter">Anzahl Mitarbeitende noch unbekannt...</div>
         </div>
         <div class="span2 tools text-right">
             <Button class="btn btn-toggle-status"><%= @status_change_msg()%></Button>

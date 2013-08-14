@@ -12,6 +12,7 @@ class regel.RegelController extends Spine.Controller
     ".collapse": "collapse"
     ".konfigurationen": "konfigurationen"
     ".btn-toggle-status": "toggle_status_button"
+    ".anzeige-anzahl-mitarbeiter": "anzeige_anzahl_mitarbeiter"
 
   events:
     "click .titel": "toggle_content"
@@ -23,14 +24,14 @@ class regel.RegelController extends Spine.Controller
   constructor: (options)->
     super(options)
     @konfiguration_controllers = []
-    regel.Regel.bind 'refresh', @render_regeln            # Nach jeder Aktion die Info neu rendern
     regel.PositionKonfiguration.bind 'create', @render_konfiguration
 
   render: () ->
     html = JST['regel/views/regel'](@item)
-
     @replace(html)
+    new regel.RegelAnzeigeAnzahlMitarbeiterController(el: @anzeige_anzahl_mitarbeiter, regel: @item)
     @
+
 
   toggle_content: (arg) ->
     @collapse.collapse('toggle')
@@ -47,7 +48,6 @@ class regel.RegelController extends Spine.Controller
 
   create_new_configuration: (arg) ->
     options = {}
-
     c = new regel.NeueKonfigurationController(regel: @item)
     c.render()
     $("#myModal").html(c.el)
@@ -73,3 +73,6 @@ class regel.RegelController extends Spine.Controller
     @konfiguration_controllers.push c
     c.render()
     @konfigurationen.append(c.el)
+
+  zeige_mitarbeiter_infos: () ->
+    #alert "hi"
