@@ -12,8 +12,8 @@ class regel.MitarbeiterController extends Spine.Controller
   ###
   constructor: (options)->
     super(options)
-    regel.Mitarbeiter.bind("einer_konfiguration_hinzugefuegt", @mitarbeiter_wurde_einer_konfiguration_hinzugefuegt)
-    regel.Mitarbeiter.bind("einer_konfiguration_entfernt", @mitarbeiter_wurde_einer_konfiguration_entfernt)
+    @item.bind("einer_konfiguration_hinzugefuegt", @mitarbeiter_wurde_einer_konfiguration_hinzugefuegt)
+    @item.bind("einer_konfiguration_entfernt", @mitarbeiter_wurde_einer_konfiguration_entfernt)
 
 
   render: () ->
@@ -47,7 +47,7 @@ class regel.MitarbeiterController extends Spine.Controller
 
 
   mitarbeiter_wurde_einer_konfiguration_hinzugefuegt: (mitarbeiter, sonst) =>
-    if mitarbeiter.id == @item.id && sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
+    if sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
       if @el.hasClass("zugeordnet")
         @konfiguration.remove_mitarbeiter(@item)
       @el.removeClass("frei").removeClass("zugeordnet").addClass("anderer-konfiguration-zugeordnet")
@@ -55,5 +55,5 @@ class regel.MitarbeiterController extends Spine.Controller
         @el.hide()
 
   mitarbeiter_wurde_einer_konfiguration_entfernt: (mitarbeiter, sonst) =>
-    if mitarbeiter.id == @item.id && sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
+    if sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
       @el.removeClass("frei").removeClass("anderer-konfiguration-zugeordnet").addClass("frei")
