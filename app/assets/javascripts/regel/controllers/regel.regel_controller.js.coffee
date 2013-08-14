@@ -27,7 +27,7 @@ class regel.RegelController extends Spine.Controller
   constructor: (options)->
     super(options)
     @konfiguration_controllers = []
-    regel.PositionKonfiguration.bind 'create', @render_konfiguration
+    regel.Konfiguration.bind 'create', @render_konfiguration
 
   render: () ->
     html = JST['regel/views/regel'](@regel)

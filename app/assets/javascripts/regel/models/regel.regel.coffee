@@ -47,4 +47,4 @@ class regel.Regel extends Spine.Model
 
 
   konfigurationen: ->
-    regel.PositionKonfiguration.select((k) => k.regel_id == @id)
+    regel.Konfiguration.select((k) => k.regel_id == @id)

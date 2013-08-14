@@ -1,16 +1,1 @@
-<div id="konfiguration_<%= @id %>"> <!--TODO regelgui: Warum kann man hier nur 11 Grideinheiten vergeben?-->
-    <div class="span1 feedback"></div>
-    <div class="span4">
-        <div><%= @id %></div>
-        <div class="slider"></div>
-    </div>
-    <div class="span1">Text</div>
-    <div class="span4">
-        <div class="mitarbeiterliste"></div>
-    </div>
-    <div class="span1">
-        <Button class="btn btn-loeschen">loeschen</Button>
-        <Button class="btn btn-mitarbeiter-hinzufuegen">Mitarbeitende hinzufügen</Button>
-    </div>
-</div>
-
+<div> nicht benutzt</div>

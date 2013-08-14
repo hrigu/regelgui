@@ -5,6 +5,8 @@ unless window.regel
 Das Regel-Modell.
 ###
 class regel.Konfiguration extends Spine.Model
+  @configure "Konfiguration", "id", "name", "type", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids"
+  @extend Spine.Model.Ajax
 
   @MITARBEITER_ANZEIGEN = "mitarbeiter_anzeigen"
   @MITARBEITER_BEARBEITEN = "mitarbeiter_bearbeiten"
@@ -12,6 +14,12 @@ class regel.Konfiguration extends Spine.Model
   constructor: ()->
     @status = regel.Konfiguration.MITARBEITER_ANZEIGEN
     super
+
+  @url: ->
+    Routes.konfigurationen_path()
+
+  url: (options)->
+    Routes.konfiguration_path(@id)#"regel/#{@id}"
 
 
   type_as_string: () ->
@@ -61,11 +69,6 @@ class regel.Konfiguration extends Spine.Model
 
 
 class regel.PositionKonfiguration extends regel.Konfiguration
-  @configure "PositionKonfiguration", "id", "name", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids"
-  @extend Spine.Model.Ajax
-
-  @url: ->
-    Routes.position_konfigurationen_path()
-
-  url: (options)->
-    Routes.position_konfiguration_path(@id)#"regel/#{@id}"
+  constructor: (args)->
+    args.type = "PositionKonfiguration"
+    super

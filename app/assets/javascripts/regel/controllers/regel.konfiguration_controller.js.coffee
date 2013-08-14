@@ -16,7 +16,7 @@ class regel.KonfigurationController extends Spine.Controller
 
   constructor: (options)->
     super(options)
-    regel.PositionKonfiguration.bind "ajaxSuccess", (konfiguration, xhr) =>
+    regel.Konfiguration.bind "ajaxSuccess", (konfiguration, xhr) =>
       if konfiguration.id == @konfiguration.id
         #@feedback_element.show()
         @feedback_element.html("<div>gespeichert</div>")
@@ -26,7 +26,7 @@ class regel.KonfigurationController extends Spine.Controller
         );
 
   render: () ->
-    html = JST["regel/views/#{@konfiguration.type_as_string().toLowerCase()}"](@konfiguration)
+    html = JST["regel/views/konfiguration"](@konfiguration)
     @replace(html)
     @initialize_grafik()
     @initialize_mitarbeiter()

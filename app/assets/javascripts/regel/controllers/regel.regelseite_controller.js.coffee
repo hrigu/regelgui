@@ -32,7 +32,7 @@ class regel.Status extends Spine.Module
     @reg_fetched = false
     @konf_fetched = false
     @mit_fetched = false
-    regel.PositionKonfiguration.bind 'refresh', @konfigurationen_fetched
+    regel.Konfiguration.bind 'refresh', @konfigurationen_fetched
     regel.Mitarbeiter.bind 'refresh', @mitarbeiter_fetched
     regel.Regel.bind 'refresh', @regel_fetched
 

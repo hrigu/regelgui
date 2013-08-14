@@ -7,6 +7,7 @@ Regelgui::Application.routes.draw do
   resources :users
 
   resources :regeln
+  resources :konfigurationen
   resources :position_konfigurationen
   resources :mitarbeiter
 end
