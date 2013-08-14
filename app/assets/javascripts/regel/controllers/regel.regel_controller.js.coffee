@@ -69,10 +69,11 @@ class regel.RegelController extends Spine.Controller
 
   #private
   render_konfiguration:(konfiguration) =>
-    c = new regel.KonfigurationController(regel: @item, item: konfiguration)
-    @konfiguration_controllers.push c
-    c.render()
-    @konfigurationen.append(c.el)
+    if (konfiguration.regel().id == @item.id)
+      c = new regel.KonfigurationController(regel: @item, item: konfiguration)
+      @konfiguration_controllers.push c
+      c.render()
+      @konfigurationen.append(c.el)
 
   zeige_mitarbeiter_infos: () ->
     #alert "hi"
