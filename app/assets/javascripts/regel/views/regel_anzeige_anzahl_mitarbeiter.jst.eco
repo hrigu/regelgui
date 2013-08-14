@@ -2,8 +2,8 @@
     <% if @summe_der_gesetzten_mitarbeiter() == 0: %>
         Noch niemandem zugewiesen
     <% else if @summe_der_gesetzten_mitarbeiter() == @summe_aller_mitarbeiter(): %>
-        Allen zugewiesen
+        Allen Mitarbeitenden zugewiesen
     <% else: %>
-        <%= @summe_der_gesetzten_mitarbeiter() %> von <%= @summe_aller_mitarbeiter() %> Mitarbeitende zugewiesen
+        <%= @summe_der_gesetzten_mitarbeiter() %> von <%= @summe_aller_mitarbeiter() %> Mitarbeitenden zugewiesen
     <% end %>
 </div>
