@@ -17,7 +17,7 @@ class regel.KonfigurationController extends Spine.Controller
   constructor: (options)->
     super(options)
     regel.PositionKonfiguration.bind "ajaxSuccess", (konfiguration, xhr) =>
-      if konfiguration.id == @item.id
+      if konfiguration.id == @konfiguration.id
         #@feedback_element.show()
         @feedback_element.html("<div>gespeichert</div>")
         @feedback_element.fadeTo('slow', 0, () =>
@@ -26,7 +26,7 @@ class regel.KonfigurationController extends Spine.Controller
         );
 
   render: () ->
-    html = JST["regel/views/#{@item.type_as_string().toLowerCase()}"](@item)
+    html = JST["regel/views/#{@konfiguration.type_as_string().toLowerCase()}"](@konfiguration)
     @replace(html)
     @initialize_grafik()
     @initialize_mitarbeiter()
@@ -37,20 +37,20 @@ class regel.KonfigurationController extends Spine.Controller
       min: 0,
       max: 100,
       range: "min",
-      value: @item.gruenorangerot_position_100,
+      value: @konfiguration.gruenorangerot_position_100,
 #      slide: (event, ui) ->
 #        $("#gruenorangerot_position_100_" + regel.id).text(ui.value)
       stop: (event, ui) =>
-        @item.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
+        @konfiguration.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
     })
 
   initialize_mitarbeiter: () ->
-    @item.status = regel.Konfiguration.MITARBEITER_ANZEIGEN
+    @konfiguration.status = regel.Konfiguration.MITARBEITER_ANZEIGEN
 
     @mitarbeiter_controllers = []
     mitarbeiter = @regel.alle_mitarbeiter()
     for ma in mitarbeiter
-      c = new regel.MitarbeiterController(regel: @regel, konfiguration: @item, item: ma)
+      c = new regel.MitarbeiterController(regel: @regel, konfiguration: @konfiguration, item: ma)
       @mitarbeiter_controllers.push c
       c.render()
       @mitarbeiter_container.append(c.el)
@@ -60,8 +60,8 @@ class regel.KonfigurationController extends Spine.Controller
     super
 
   toggle_alle_mitarbeiter_anzeigen: () ->
-    @item.toggle_status()
-    if (@item.is_status_mitarbeiter_bearbeiten())
+    @konfiguration.toggle_status()
+    if (@konfiguration.is_status_mitarbeiter_bearbeiten())
       this.mitarbeiter_container.children(".mitarbeiter").show()
       this.btn_mitarbeiter_hinzufuegen.text("Nur eigene Mitarbeitende anzeigen")
     else
@@ -71,5 +71,5 @@ class regel.KonfigurationController extends Spine.Controller
       this.btn_mitarbeiter_hinzufuegen.text("Mitarbeitende hinzufügen")
 
   konfiguration_loeschen: ()->
-    @item.destroy()
+    @konfiguration.destroy()
     @release()

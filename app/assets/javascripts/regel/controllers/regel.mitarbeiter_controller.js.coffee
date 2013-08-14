@@ -49,7 +49,7 @@ class regel.MitarbeiterController extends Spine.Controller
   mitarbeiter_wurde_einer_konfiguration_hinzugefuegt: (mitarbeiter, sonst) =>
     if sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
       if @el.hasClass("zugeordnet")
-        @konfiguration.remove_mitarbeiter(@item)
+        @konfiguration.remove_mitarbeiter(@item) unless @konfiguration.destroyed # BUG: eigentlich sollte dieser Kontroller nicht mehr herumhängen, da er released wurde
       @el.removeClass("frei").removeClass("zugeordnet").addClass("anderer-konfiguration-zugeordnet")
       unless @konfiguration.is_status_mitarbeiter_bearbeiten()
         @el.hide()

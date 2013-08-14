@@ -21,8 +21,8 @@ class regel.RegelseiteController extends Spine.Controller
 
 
   render_regeln: (regeln) =>
-    for regel_item in regeln
-      c = new regel.RegelController(item: regel_item)
+    for r in regeln
+      c = new regel.RegelController(regel: r)
       @regelliste.append(c.render().el)
 
 class regel.Status extends Spine.Module

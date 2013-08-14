@@ -4,7 +4,7 @@ unless window.regel
 
 ###
   Controller für eine spezifische Regel
-  @item: Das regel.Regel Element
+  @regel: Das regel.Regel Element
 ###
 class regel.RegelController extends Spine.Controller
 
@@ -21,15 +21,18 @@ class regel.RegelController extends Spine.Controller
     "click .btn-toggle-status": "toggle_status"
     "click .btn-neue-onfiguration": "create_new_configuration"
 
+  ###
+  regel
+  ###
   constructor: (options)->
     super(options)
     @konfiguration_controllers = []
     regel.PositionKonfiguration.bind 'create', @render_konfiguration
 
   render: () ->
-    html = JST['regel/views/regel'](@item)
+    html = JST['regel/views/regel'](@regel)
     @replace(html)
-    new regel.RegelAnzeigeAnzahlMitarbeiterController(el: @anzeige_anzahl_mitarbeiter, regel: @item)
+    new regel.RegelAnzeigeAnzahlMitarbeiterController(el: @anzeige_anzahl_mitarbeiter, regel: @regel)
     @
 
 
@@ -37,10 +40,10 @@ class regel.RegelController extends Spine.Controller
     @collapse.collapse('toggle')
 
   toggle_status: (arg) ->
-    @el.removeClass(@item.status())
-    @item.toggle_status()
-    @toggle_status_button.text(@item.status_change_msg())
-    @el.addClass(@item.status())
+    @el.removeClass(@regel.status())
+    @regel.toggle_status()
+    @toggle_status_button.text(@regel.status_change_msg())
+    @el.addClass(@regel.status())
 
   show_content: (arg) ->
     if $(arg.target).hasClass('collapse')   #Damit nicht der show event des popovers reinspielt
@@ -48,13 +51,12 @@ class regel.RegelController extends Spine.Controller
 
   create_new_configuration: (arg) ->
     options = {}
-    c = new regel.NeueKonfigurationController(regel: @item)
-    c.render()
+    c = new regel.NeueKonfigurationController(regel: @regel).render()
     $("#myModal").html(c.el)
     $("#myModal").modal("show")
 
   ###
-  released alle KonfigurationsController
+  releases alle KonfigurationsController
   ###
   release_content: (arg) ->
     if $(arg.target).hasClass('collapse')   #Damit nicht der show event des popovers reinspielt
@@ -63,14 +65,14 @@ class regel.RegelController extends Spine.Controller
 
   #private
   render_konfigurationen: () =>
-    konfigurationen = @item.konfigurationen()
+    konfigurationen = @regel.konfigurationen()
     for konfiguration in konfigurationen
       @render_konfiguration(konfiguration)
 
   #private
   render_konfiguration:(konfiguration) =>
-    if (konfiguration.regel().id == @item.id)
-      c = new regel.KonfigurationController(regel: @item, item: konfiguration)
+    if (konfiguration.regel().id == @regel.id)
+      c = new regel.KonfigurationController(regel: @regel, konfiguration: konfiguration)
       @konfiguration_controllers.push c
       c.render()
       @konfigurationen.append(c.el)

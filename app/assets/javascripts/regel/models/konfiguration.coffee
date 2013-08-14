@@ -44,9 +44,9 @@ class regel.Konfiguration extends Spine.Model
     false
 
    destroy: () ->
-     super
      @regel().trigger("anzahl_mitarbeiter_geaendert")
      m.trigger("einer_konfiguration_entfernt", regel: @regel(), konfiguration: @) for m in @mitarbeiter()
+     super
 
 
   toggle_status: () ->
