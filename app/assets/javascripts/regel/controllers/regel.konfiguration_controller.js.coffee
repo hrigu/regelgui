@@ -50,7 +50,7 @@ class regel.KonfigurationController extends Spine.Controller
     @mitarbeiter_controllers = []
     mitarbeiter = @regel.alle_mitarbeiter()
     for ma in mitarbeiter
-      c = new regel.MitarbeiterController(regel: @regel, konfiguration: @konfiguration, item: ma)
+      c = new regel.MitarbeiterController(regel: @regel, konfiguration: @konfiguration, mitarbeiter: ma)
       @mitarbeiter_controllers.push c
       c.render()
       @mitarbeiter_container.append(c.el)
