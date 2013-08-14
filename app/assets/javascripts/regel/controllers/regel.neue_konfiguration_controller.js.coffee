@@ -31,7 +31,12 @@ class regel.NeueKonfigurationController extends Spine.Controller
 
 
   sichern: ()->
-    value = @formular.find(":checked").attr("value")
-    neue_konfiguration = new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 50, mitarbeiter_ids: [])
+    value = parseInt(@formular.find(":checked").attr("value"))
+    neue_konfiguration = switch value
+      when 1 then new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 10, mitarbeiter_ids: [])
+      when 2 then new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 90, mitarbeiter_ids: [])
+      when 3 then new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, mitarbeiter_ids: [])
+      when 4 then new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
+      when 5 then new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
     neue_konfiguration.save()
     $("#myModal").modal("hide")

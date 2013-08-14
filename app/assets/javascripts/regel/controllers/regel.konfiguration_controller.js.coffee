@@ -13,6 +13,8 @@ class regel.KonfigurationController extends Spine.Controller
   events:
     "click .btn-mitarbeiter-hinzufuegen": "toggle_alle_mitarbeiter_anzeigen"
     "click .btn-loeschen": "konfiguration_loeschen"
+    "change .gruenorangerot input": "update_gruenorangerot_field"
+
 
   constructor: (options)->
     super(options)
@@ -73,3 +75,11 @@ class regel.KonfigurationController extends Spine.Controller
   konfiguration_loeschen: ()->
     @konfiguration.destroy()
     @release()
+
+
+  update_gruenorangerot_field: (event) =>
+    input = event.currentTarget
+    property = input.attributes["data-property"].value
+    value = parseInt(input.value)
+    @konfiguration.updateAttribute(property, value)
+

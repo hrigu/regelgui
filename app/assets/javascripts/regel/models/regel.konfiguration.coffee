@@ -5,7 +5,7 @@ unless window.regel
 Das Regel-Modell.
 ###
 class regel.Konfiguration extends Spine.Model
-  @configure "Konfiguration", "id", "name", "type", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids"
+  @configure "Konfiguration", "id", "name", "type", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen1", "orange1", "rot1", "gruen2", "orange2", "rot2"
   @extend Spine.Model.Ajax
 
   @MITARBEITER_ANZEIGEN = "mitarbeiter_anzeigen"
@@ -52,7 +52,6 @@ class regel.Konfiguration extends Spine.Model
     false
 
    destroy: () ->
-     debugger
      super
      @regel().trigger("anzahl_mitarbeiter_geaendert")
      m.trigger("einer_konfiguration_entfernt", regel: @regel(), konfiguration: @) for m in @mitarbeiter()
@@ -71,4 +70,9 @@ class regel.Konfiguration extends Spine.Model
 class regel.PositionKonfiguration extends regel.Konfiguration
   constructor: (args)->
     args.type = "PositionKonfiguration"
+    super
+
+class regel.GruenOrangeRotKonfiguration extends regel.Konfiguration
+  constructor: (args)->
+    args.type = "GruenOrangeRotKonfiguration"
     super

@@ -9,11 +9,11 @@ class Konfiguration < ActiveRecord::Base
 
 
   def gruenorangerot_position_100
-    self.gruenorangerot_position / 30
+    self.gruenorangerot_position.nil? ? nil: self.gruenorangerot_position / 30
   end
 
   def gruenorangerot_position_100=(value)
-    self.gruenorangerot_position = value * 30
+    self.gruenorangerot_position = value * 30 if value
   end
 
 end
