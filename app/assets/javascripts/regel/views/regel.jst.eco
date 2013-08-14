@@ -1,7 +1,7 @@
 <div id="regel<%= @id %>" class="accordion-group <%= @status() %>">
     <div class="accordion-heading row-fluid">
         <div class="span7">
-            <a class="titel accordion-toggle" href="#>"><%=@name %></a>
+            <a class="titel accordion-toggle" href="#>"><%=@id %> <%=@name %></a>
         </div>
         <div class="span3">
             <div class="anzeige-anzahl-mitarbeiter">Anzahl Mitarbeitende noch unbekannt...</div>

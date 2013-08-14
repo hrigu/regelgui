@@ -26,21 +26,28 @@ class regel.Konfiguration extends Spine.Model
   regel: ->
     regel.Regel.find(@regel_id)
 
+
   add_mitarbeiter: (mitarbeiter) ->
     @mitarbeiter_ids.push mitarbeiter.id
     @save()
-    @regel().trigger("mitarbeiteranzahl_geaendert")
+    @regel().trigger("anzahl_mitarbeiter_geaendert")
 
   remove_mitarbeiter: (mitarbeiter) ->
     index = @mitarbeiter_ids.indexOf mitarbeiter.id
     @mitarbeiter_ids.splice(index, 1)
     @save()
-    @regel().trigger("mitarbeiteranzahl_geaendert")
+    @regel().trigger("anzahl_mitarbeiter_geaendert")
 
   is_mitarbeiter_set: (m) ->
     for id in @mitarbeiter_ids
       return true if m.id == id
     false
+
+   destroy: () ->
+     super
+     @regel().trigger("anzahl_mitarbeiter_geaendert")
+     m.trigger("einer_konfiguration_entfernt", regel: @regel(), konfiguration: @) for m in @mitarbeiter()
+
 
   toggle_status: () ->
     if(@status == regel.Konfiguration.MITARBEITER_BEARBEITEN)

@@ -55,5 +55,6 @@ class regel.MitarbeiterController extends Spine.Controller
         @el.hide()
 
   mitarbeiter_wurde_einer_konfiguration_entfernt: (mitarbeiter, sonst) =>
+    #@log("this.regel.id = #{@regel.id}, this.konfiguration.id = #{@konfiguration.id}, geloescht: mitarbeiter.id = #{mitarbeiter.id}, geloescht von regel.id = #{sonst.regel.id}, geloescht von konfiguration.id = #{sonst.konfiguration.id}")
     if sonst.regel.id == @regel.id && sonst.konfiguration.id != @konfiguration.id
       @el.removeClass("frei").removeClass("anderer-konfiguration-zugeordnet").addClass("frei")

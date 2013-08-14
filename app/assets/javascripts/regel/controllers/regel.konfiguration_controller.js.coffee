@@ -72,5 +72,4 @@ class regel.KonfigurationController extends Spine.Controller
 
   konfiguration_loeschen: ()->
     @item.destroy()
-    #TODO die anderen Konfigurationen benachrichtigen, dass Mitarbeiter wieder frei sind.
     @release()
