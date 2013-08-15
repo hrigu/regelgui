@@ -5,7 +5,7 @@ unless window.regel
 Das Regel-Modell.
 ###
 class regel.Regel extends Spine.Model
-  @configure "Regel", "id", "sort_order", "sort_order_position", "name", "ist_aktiv", "variable_id"
+  @configure "Regel", "id", "sort_order", "sort_order_position", "name", "ist_aktiv", "variable_id", "zeitfenster", "grenze_maximum", "grenze_minimum"
   @extend Spine.Model.Ajax
 
   @url: ->
@@ -44,6 +44,16 @@ class regel.Regel extends Spine.Model
 
   status_change_msg: ->
     if @ist_aktiv then "deaktivieren" else "aktivieren"
+
+
+  moegliche_konfigurationsvarianten: ->
+    konfigurationsvarianten = {}
+    if @zeitfenster == null
+      konfigurationsvarianten = regel.Konfiguration.KONFIGURATION_VARIANTEN
+    else
+      konfigurationsvarianten = {position_konfiguration_minimieren: regel.Konfiguration.KONFIGURATION_VARIANTEN.position_konfiguration_minimieren}
+    konfigurationsvarianten
+
 
 
   konfigurationen: ->

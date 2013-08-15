@@ -21,7 +21,18 @@ class regel.NeueKonfigurationController extends Spine.Controller
     $("#myModal").on('hidden', @fenster_schliessen) #Diese Objekt releasen nachdem das modale Fenster versteckt wurde
 
   render: () ->
-    html = JST['regel/views/neue_konfiguration']()
+    html = JST['regel/views/neue_konfiguration']({
+      regel: @regel
+      # Die Optionen der Auswahl
+      optionen: (konfigurations_varianten) ->
+        html = ""
+        index = 0
+        for key, value of konfigurations_varianten
+          checked = if index == 0 then true else false
+          index += 1
+          html += JST['regel/views/konfiguration_option']({varianten_name: key, variante: value, checked: checked})
+        html
+    })
     @replace(html)
     @
 
@@ -31,12 +42,19 @@ class regel.NeueKonfigurationController extends Spine.Controller
 
 
   sichern: ()->
-    value = parseInt(@formular.find(":checked").attr("value"))
-    neue_konfiguration = switch value
-      when 1 then new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 10, mitarbeiter_ids: [])
-      when 2 then new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 90, mitarbeiter_ids: [])
-      when 3 then new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, mitarbeiter_ids: [])
-      when 4 then new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
-      when 5 then new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
+    value = @formular.find(":checked").attr("value")
+    variante = regel.Konfiguration.KONFIGURATION_VARIANTEN[value]
+    neue_konfiguration = switch
+      when variante.konfiguration == regel.Konfiguration.POSITION_KONFIGURATION
+        new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 10, mitarbeiter_ids: [])
+
+      when variante.konfiguration == regel.Konfiguration.GRUENORANGEROT_KONFIGURATION
+        switch
+          when variante.auspraegung == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+            new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, mitarbeiter_ids: [])
+          when variante.auspraegung == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+            new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
+          when variante.auspraegung == regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+            new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
     neue_konfiguration.save()
     $("#myModal").modal("hide")

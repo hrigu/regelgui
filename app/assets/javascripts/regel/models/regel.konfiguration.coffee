@@ -11,6 +11,21 @@ class regel.Konfiguration extends Spine.Model
   @MITARBEITER_ANZEIGEN = "mitarbeiter_anzeigen"
   @MITARBEITER_BEARBEITEN = "mitarbeiter_bearbeiten"
 
+  @POSITION_KONFIGURATION = "PositionKonfiguration"
+  @GRUENORANGEROT_KONFIGURATION = "GruenOrangeRotKonfiguration"
+
+  @AUSPRAEGUNG_MAXIMIEREN = "maximieren"
+  @AUSPRAEGUNG_MINIMIEREN = "minimieren"
+  @AUSPRAEGUNG_EINSCHRAENKEN = "einschraenken"
+
+  @KONFIGURATION_VARIANTEN = {
+    position_konfiguration_maximieren: {konfiguration: @POSITION_KONFIGURATION, auspraegung: @AUSPRAEGUNG_MAXIMIEREN}
+    position_konfiguration_minimieren: {konfiguration: @POSITION_KONFIGURATION, auspraegung: @AUSPRAEGUNG_MINIMIEREN}
+    gruenorangerot_konfiguration_maximieren: {konfiguration: @GRUENORANGEROT_KONFIGURATION, auspraegung: @AUSPRAEGUNG_MAXIMIEREN}
+    gruenorangerot_konfiguration_minimieren: {konfiguration: @GRUENORANGEROT_KONFIGURATION, auspraegung: @AUSPRAEGUNG_MINIMIEREN}
+    gruenorangerot_konfiguration_einschraenken: {konfiguration: @GRUENORANGEROT_KONFIGURATION, auspraegung: @AUSPRAEGUNG_EINSCHRAENKEN}
+  }
+
   constructor: ()->
     @status = regel.Konfiguration.MITARBEITER_ANZEIGEN
     super
@@ -69,10 +84,10 @@ class regel.Konfiguration extends Spine.Model
 
 class regel.PositionKonfiguration extends regel.Konfiguration
   constructor: (args)->
-    args.type = "PositionKonfiguration"
+    args.type = regel.Konfiguration.POSITION_KONFIGURATION
     super
 
 class regel.GruenOrangeRotKonfiguration extends regel.Konfiguration
   constructor: (args)->
-    args.type = "GruenOrangeRotKonfiguration"
+    args.type = regel.Konfiguration.GRUENORANGEROT_KONFIGURATION
     super

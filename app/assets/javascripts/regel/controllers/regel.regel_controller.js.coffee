@@ -50,7 +50,6 @@ class regel.RegelController extends Spine.Controller
       @render_konfigurationen()
 
   create_new_configuration: (arg) ->
-    options = {}
     c = new regel.NeueKonfigurationController(regel: @regel).render()
     $("#myModal").html(c.el)
     $("#myModal").modal("show")

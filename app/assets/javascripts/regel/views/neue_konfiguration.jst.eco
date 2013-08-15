@@ -6,26 +6,7 @@
     <div class="modal-body">
         <form class="form-horizontal">
             <div class="control-group">
-                <label class="radio">
-                    <input type="radio" name="optionsRadios" id="position-minimieren" value="1" checked>
-                    Wert minimieren
-                </label>
-                <label class="radio">
-                    <input type="radio" name="optionsRadios" id="position-maximieren" value="2">
-                    Wert maximieren
-                </label>
-                <label class="radio">
-                    <input type="radio" name="optionsRadios" id="gruenorangerot-minimieren" value="3">
-                    Gruenorangerot: minimieren
-                </label>
-                <label class="radio">
-                    <input type="radio" name="optionsRadios" id="gruenorangerot-maximieren" value="4">
-                    Gruenorangerot: maximieren
-                </label>
-                <label class="radio">
-                    <input type="radio" name="optionsRadios" id="gruenorangerot-einschränken" value="5">
-                    Gruenorangerot: einschränken
-                </label>
+                <%- @optionen(@regel.moegliche_konfigurationsvarianten()) %>
             </div>
         </form>
     </div>

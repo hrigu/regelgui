@@ -1,0 +1,4 @@
+<label class="radio">
+    <input type="radio" name="optionsRadios" id="<%= @varianten_name %>" value="<%= @varianten_name %>" <%= "checked" if @checked %>>
+    <%= @varianten_name %>
+</label>
