@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20130807120230) do
     t.integer  "grenze_minimum"
     t.boolean  "ist_aktiv"
     t.string   "kommentar"
-    t.string   "type"
+    t.integer  "sort_order"
     t.integer  "variable_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false

@@ -8,7 +8,7 @@ class CreateRegeln < ActiveRecord::Migration
       t.boolean :ist_aktiv
       t.string :kommentar
 
-      t.string :type
+      t.integer :sort_order
       t.integer :variable_id
 
       t.timestamps

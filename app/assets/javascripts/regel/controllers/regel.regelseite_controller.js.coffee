@@ -25,6 +25,14 @@ class regel.RegelseiteController extends Spine.Controller
       c = new regel.RegelController(regel: r)
       @regelliste.append(c.render().el)
 
+    $(".regelliste").sortable({
+      update: (event, ui)->
+        index = ui.item.index()
+        r = regel.Regel.find(ui.item.data("id"))
+        r.updateAttribute("sort_order_position", index)
+    });
+
+
 class regel.Status extends Spine.Module
   @extend Spine.Events
 

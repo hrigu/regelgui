@@ -5,7 +5,7 @@ unless window.regel
 Das Regel-Modell.
 ###
 class regel.Regel extends Spine.Model
-  @configure "Regel", "id", "name", "ist_aktiv", "variable_id"
+  @configure "Regel", "id", "sort_order", "sort_order_position", "name", "ist_aktiv", "variable_id"
   @extend Spine.Model.Ajax
 
   @url: ->

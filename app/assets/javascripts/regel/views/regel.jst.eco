@@ -1,4 +1,4 @@
-<div id="regel<%= @id %>" class="accordion-group <%= @status() %>">
+<div id="regel<%= @id %>" data-id="<%= @id%>" class="accordion-group <%= @status() %>">
     <div class="accordion-heading row-fluid">
         <div class="span7">
             <a class="titel accordion-toggle" href="#>"><%=@id %> <%=@name %></a>

@@ -1,3 +1,0 @@
-class RegelMitZeitfenster < Regel
-
-end
