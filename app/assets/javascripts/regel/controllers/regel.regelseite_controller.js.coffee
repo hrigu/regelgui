@@ -26,6 +26,8 @@ class regel.RegelseiteController extends Spine.Controller
       @regelliste.append(c.render().el)
 
     $(".regelliste").sortable({
+      handle: 'i.icon-resize-vertical',
+      cursor: 'move',
       update: (event, ui)->
         index = ui.item.index()
         r = regel.Regel.find(ui.item.data("id"))
