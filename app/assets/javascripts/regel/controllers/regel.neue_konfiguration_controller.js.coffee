@@ -46,15 +46,15 @@ class regel.NeueKonfigurationController extends Spine.Controller
     variante = regel.Konfiguration.KONFIGURATION_VARIANTEN[value]
     neue_konfiguration = switch
       when variante.konfiguration == regel.Konfiguration.POSITION_KONFIGURATION
-        new regel.PositionKonfiguration(regel_id: @regel.id, gruenorangerot_position_100: 10, mitarbeiter_ids: [])
+        new regel.Konfiguration(type: variante.konfiguration, regel_id: @regel.id, gruenorangerot_position_100: 10, mitarbeiter_ids: [])
 
       when variante.konfiguration == regel.Konfiguration.GRUENORANGEROT_KONFIGURATION
         switch
           when variante.auspraegung == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
-            new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, mitarbeiter_ids: [])
+            new regel.Konfiguration(type: variante.konfiguration, regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, mitarbeiter_ids: [])
           when variante.auspraegung == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
-            new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
+            new regel.Konfiguration(type: variante.konfiguration, regel_id: @regel.id, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
           when variante.auspraegung == regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-            new regel.GruenOrangeRotKonfiguration(regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
+            new regel.Konfiguration(type: variante.konfiguration, regel_id: @regel.id, gruen1: 10, orange1: 20, rot1: 30, gruen2: 30, orange2: 40, rot2: 50, mitarbeiter_ids: [])
     neue_konfiguration.save()
     $("#myModal").modal("hide")

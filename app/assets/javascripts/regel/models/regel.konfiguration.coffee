@@ -1,8 +1,35 @@
 unless window.regel
   window.regel = {}
 
+
+regel.GruenOrangeRotKonfigurationModule = {
+  name: () ->
+    "GruenOrangeRotKonfiguration"
+
+  max_value: ()->
+    x = Math.max [@gruen1, @orange1, @rot1, @gruen2, @orange2, @rot2]...
+    x += 20
+    x
+
+  auspraegung: () ->
+    result = switch
+      when @gruen1 == null then regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+      when @gruen2 == null then regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+      else
+        regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+}
+
+regel.PositionKonfigurationModule = {
+  name: () ->
+    "PositionKonfiguration"
+
+  auspraegung: () ->
+    #TODO wie finde ich das raus?
+    @AUSPRAEGUNG_MINIMIEREN
+}
+
 ###
-Das Regel-Modell.
+Das Konfigurationsmodell
 ###
 class regel.Konfiguration extends Spine.Model
   @configure "Konfiguration", "id", "name", "type", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen1", "orange1", "rot1", "gruen2", "orange2", "rot2"
@@ -30,29 +57,16 @@ class regel.Konfiguration extends Spine.Model
     @status = regel.Konfiguration.MITARBEITER_ANZEIGEN
     super
 
+    if @type == regel.Konfiguration.POSITION_KONFIGURATION
+      regel.Konfiguration.include regel.PositionKonfigurationModule
+    else
+      regel.Konfiguration.include regel.GruenOrangeRotKonfigurationModule
+
   @url: ->
     Routes.konfigurationen_path()
 
   url: (options)->
     Routes.konfiguration_path(@id)#"regel/#{@id}"
-
-
-  auspraegung: () ->
-    if @type == @POSITION_KONFIGURATION
-      #TODO wie finde ich das raus?
-      @AUSPRAEGUNG_MINIMIEREN
-    else
-      result = switch
-        when @gruen1 == null then regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
-        when @gruen2 == null then regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
-        else
-          regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-      result
-
-  max_value:()->
-    x = Math.max [@gruen1, @orange1, @rot1, @gruen2, @orange2, @rot2]...
-    x += 20
-    x
 
   ###
   die gesetzten Mitarbeiter

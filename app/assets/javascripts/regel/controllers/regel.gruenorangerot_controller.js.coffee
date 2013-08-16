@@ -28,10 +28,7 @@ class regel.GruenOrangeRotController extends Spine.Controller
   ###
   initialize_grafik: () ->
     @plot = $.plot(
-      @gruenorangerot_plot,
-      [ [[0, @konfiguration.max_value()], [33, @konfiguration.rot1], [66, @konfiguration.orange1], [100, @konfiguration.gruen1]],
-        [[0, 0], [33, @konfiguration.rot2], [66, @konfiguration.orange2], [100, @konfiguration.gruen2]]
-      ],
+      @gruenorangerot_plot, @values()
       {
         xaxis: {
           max: 100
@@ -53,20 +50,10 @@ class regel.GruenOrangeRotController extends Spine.Controller
     @redraw_plot()
 
   redraw_plot: ()->
-    data = [
-      [
-        [0, @konfiguration.max_value()],
-        [33, @konfiguration.rot1],
-        [66, @konfiguration.orange1],
-        [100, @konfiguration.gruen1]
-      ],
-      [
-        [0, 0],
-        [33, @konfiguration.rot2],
-        [66, @konfiguration.orange2],
-        [100, @konfiguration.gruen2]
-      ]
-    ]
-
-    @plot.setData(data)
+    @plot.setData(@values())
     @plot.draw()
+
+  values: () ->
+    [ [[0, @konfiguration.max_value()], [33, @konfiguration.rot1], [66, @konfiguration.orange1], [100, @konfiguration.gruen1]],
+      [[0, 0], [33, @konfiguration.rot2], [66, @konfiguration.orange2], [100, @konfiguration.gruen2]]
+    ]
