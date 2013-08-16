@@ -9,7 +9,7 @@ class regel.KonfigurationController extends Spine.Controller
     ".mitarbeiterliste": "mitarbeiter_container"
     ".feedback": "feedback_element"
     ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
-    ".rotgruenorange-plot": "rotgruenorange_plot"
+    ".gruenorangerot .plot": "gruenorangerot_plot"
     #".mitarbeiter": "alle_mitarbeiter"      geht nicht, da dynamisch erstellt
   events:
     "click .btn-mitarbeiter-hinzufuegen": "toggle_alle_mitarbeiter_anzeigen"
@@ -51,7 +51,7 @@ class regel.KonfigurationController extends Spine.Controller
       })
     else
       $.plot(
-        @rotgruenorange_plot,
+        @gruenorangerot_plot,
         [ [[0, 0], [50, 10], [100, 100]] ],
         {
           xaxis: {

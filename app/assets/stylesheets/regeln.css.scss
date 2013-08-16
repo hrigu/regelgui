@@ -34,10 +34,20 @@
     }
   }
 
-  .rotgruenorange-plot{
-    background-color: #dbffd0;
-    width:300px;
-    height:200px;
+  .gruenorangerot{
+    .plot{
+      background-color: #dbffd0;
+      width:280px;
+      height:160px;
+    }
+    .input-fields {
+      padding-left: 65px;
+      padding-top: 10px;
+    }
+  }
+
+  .konfiguration{
+    border-top: 1px solid #82A0B6;;
   }
 
   //div .span1{
