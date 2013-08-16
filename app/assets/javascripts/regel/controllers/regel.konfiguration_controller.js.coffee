@@ -5,18 +5,14 @@ unless window.regel
 class regel.KonfigurationController extends Spine.Controller
 
   elements:
-    ".slider": "slider"
     ".mitarbeiterliste": "mitarbeiter_container"
     ".feedback": "feedback_element"
     ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
-    ".gruenorangerot .plot": "gruenorangerot_plot"
-    ".gruenorangerot .input-fields .minimieren": "input_minimieren"
-    ".gruenorangerot .input-fields .maximieren": "input_maximieren"
-    #".mitarbeiter": "alle_mitarbeiter"      geht nicht, da dynamisch erstellt
+    ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
+    ".konfiguration-value": "konfiguration_value"
   events:
     "click .btn-mitarbeiter-hinzufuegen": "toggle_alle_mitarbeiter_anzeigen"
     "click .btn-loeschen": "konfiguration_loeschen"
-    "change .gruenorangerot input": "update_gruenorangerot_field"
 
 
   constructor: (options)->
@@ -33,42 +29,19 @@ class regel.KonfigurationController extends Spine.Controller
   render: () ->
     html = JST["regel/views/konfiguration"](@konfiguration)
     @replace(html)
-    @input_minimieren.hide() if @konfiguration.auspraegung() == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
-    @input_maximieren.hide() if @konfiguration.auspraegung() == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+    @initialize_konfiguration_value()
     @initialize_mitarbeiter()
     @
 
-  ###
-  Wird aufgerufen nach das gerenderte HTML dem DOM zugefügt wurde. Sonst hat der Container für den Plot noch keine Dimension
-  ###
-  initialize_grafik: () ->
+  initialize_konfiguration_value: () ->
+    graphik_controller = null
     if @konfiguration.type == regel.Konfiguration.POSITION_KONFIGURATION
-      @slider.slider({
-        min: 0,
-        max: 100,
-        range: "min",
-        value: @konfiguration.gruenorangerot_position_100,
-  #      slide: (event, ui) ->
-  #        $("#gruenorangerot_position_100_" + regel.id).text(ui.value)
-        stop: (event, ui) =>
-          @konfiguration.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
-      })
+      graphik_controller = new regel.PositionController(regel: @regel, konfiguration: @konfiguration)
     else
-      @plot = $.plot(
-        @gruenorangerot_plot,
-        [ [[0, @konfiguration.max_value()], [33, @konfiguration.rot1], [66, @konfiguration.orange1], [100, @konfiguration.gruen1]],
-          [[0, 0], [33, @konfiguration.rot2], [66, @konfiguration.orange2], [100, @konfiguration.gruen2]]
-        ],
-        {
-          xaxis: {
-            max: 100
-            ticks: [[0, "schlecht"], [33, "akzeptabel"], [66, "gut"], [100, "ideal"]]
-          }
-          yaxis: {
-            min: 0
-            max: @konfiguration.max_value() }
-        }
-      )
+      graphik_controller = new regel.GruenOrangeRotController(regel: @regel, konfiguration: @konfiguration)
+    graphik_controller.render()
+    @konfiguration_value.html(graphik_controller.el)
+    @graphik_controller = graphik_controller
 
   initialize_mitarbeiter: () ->
     @konfiguration.status = regel.Konfiguration.MITARBEITER_ANZEIGEN
@@ -81,8 +54,14 @@ class regel.KonfigurationController extends Spine.Controller
       c.render()
       @mitarbeiter_container.append(c.el)
 
+  initialize_grafik: () ->
+    @graphik_controller.initialize_grafik()
+
+
+
   release: () ->
     mc.release() for mc in @mitarbeiter_controllers
+    @graphik_controller.release()
     super
 
   toggle_alle_mitarbeiter_anzeigen: () ->
@@ -99,31 +78,3 @@ class regel.KonfigurationController extends Spine.Controller
   konfiguration_loeschen: ()->
     @konfiguration.destroy()
     @release()
-
-
-  update_gruenorangerot_field: (event) =>
-    input = event.currentTarget
-    property = input.attributes["data-property"].value
-    value = parseInt(input.value)
-    @konfiguration.updateAttribute(property, value)
-
-    @redraw_plot()
-
-  redraw_plot: ()->
-    data = [
-      [
-        [0, @konfiguration.max_value()],
-        [33, @konfiguration.rot1],
-        [66, @konfiguration.orange1],
-        [100, @konfiguration.gruen1]
-      ],
-      [
-        [0, 0],
-        [33, @konfiguration.rot2],
-        [66, @konfiguration.orange2],
-        [100, @konfiguration.gruen2]
-      ]
-    ]
-
-    @plot.setData(data)
-    @plot.draw()
