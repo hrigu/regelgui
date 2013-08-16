@@ -75,6 +75,7 @@ class regel.RegelController extends Spine.Controller
       @konfiguration_controllers.push c
       c.render()
       @konfigurationen.append(c.el)
+      c.initialize_grafik()
 
   zeige_mitarbeiter_infos: () ->
     #alert "hi"

@@ -1,22 +1,26 @@
-<div id="konfiguration_<%= @id %>"> <!--TODO regelgui: Warum kann man hier nur 11 Grideinheiten vergeben?-->
-    <div class="span1 feedback"></div>
-    <div class="span4">
+<div id="konfiguration_<%= @id %>" class="row-fluid"> <!--TODO regelgui: Warum kann man hier nur 11 Grideinheiten vergeben?-->
+    <!--div class="span1 feedback"></div-->
+    <div class="span5">
         <% if @type == "PositionKonfiguration": %>
-            <div class="slider"></div>
+        <div class="slider"></div>
         <% else: %>
+        <div class="rotgruenorange-plot"></div>
         <div class="gruenorangerot">
-            <input data-property="rot1" class="input-mini rot" type="text" value="<%= @rot1 %>">
-            <input data-property="orange1" class="input-mini orange" type="text" value="<%= @orange1 %>">
-            <input data-property="gruen1" class="input-mini  gruen" type="text" value="<%= @gruen1 %>">
-
-            <input data-property="rot2" class="input-mini rot" type="text" value="<%= @rot2 %>">
-            <input data-property="orange2" class="input-mini orange" type="text" value="<%= @orange2 %>">
-            <input data-property="gruen2" class="input-mini  gruen" type="text" value="<%= @gruen2 %>">
+            <div>
+                <input data-property="rot1" class="input-mini rot" type="text" value="<%= @rot1 %>">
+                <input data-property="orange1" class="input-mini orange" type="text" value="<%= @orange1 %>">
+                <input data-property="gruen1" class="input-mini  gruen" type="text" value="<%= @gruen1 %>">
+            </div>
+            <div>
+                <input data-property="rot2" class="input-mini rot" type="text" value="<%= @rot2 %>">
+                <input data-property="orange2" class="input-mini orange" type="text" value="<%= @orange2 %>">
+                <input data-property="gruen2" class="input-mini  gruen" type="text" value="<%= @gruen2 %>">
+            </div>
         </div>
         <% end %>
     </div>
     <div class="span1">Text</div>
-    <div class="span4">
+    <div class="span5">
         <div class="mitarbeiterliste"></div>
     </div>
     <div class="span1">

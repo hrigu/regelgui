@@ -9,6 +9,7 @@ class regel.KonfigurationController extends Spine.Controller
     ".mitarbeiterliste": "mitarbeiter_container"
     ".feedback": "feedback_element"
     ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
+    ".rotgruenorange-plot": "rotgruenorange_plot"
     #".mitarbeiter": "alle_mitarbeiter"      geht nicht, da dynamisch erstellt
   events:
     "click .btn-mitarbeiter-hinzufuegen": "toggle_alle_mitarbeiter_anzeigen"
@@ -30,21 +31,38 @@ class regel.KonfigurationController extends Spine.Controller
   render: () ->
     html = JST["regel/views/konfiguration"](@konfiguration)
     @replace(html)
-    @initialize_grafik()
     @initialize_mitarbeiter()
     @
 
+  ###
+  Wird aufgerufen nach das gerenderte HTML dem DOM zugefügt wurde. Sonst hat der Container für den Plot noch keine Dimension
+  ###
   initialize_grafik: () ->
-    @slider.slider({
-      min: 0,
-      max: 100,
-      range: "min",
-      value: @konfiguration.gruenorangerot_position_100,
-#      slide: (event, ui) ->
-#        $("#gruenorangerot_position_100_" + regel.id).text(ui.value)
-      stop: (event, ui) =>
-        @konfiguration.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
-    })
+    if @konfiguration.type == regel.Konfiguration.POSITION_KONFIGURATION
+      @slider.slider({
+        min: 0,
+        max: 100,
+        range: "min",
+        value: @konfiguration.gruenorangerot_position_100,
+  #      slide: (event, ui) ->
+  #        $("#gruenorangerot_position_100_" + regel.id).text(ui.value)
+        stop: (event, ui) =>
+          @konfiguration.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
+      })
+    else
+      $.plot(
+        @rotgruenorange_plot,
+        [ [[0, 0], [50, 10], [100, 100]] ],
+        {
+          xaxis: {
+            max: 100
+            ticks: [[0, "schlecht"], [33, "akzeptabel"], [66, "gut"], [100, "ideal"]]
+          }
+          yaxis: {
+            min: 0
+            max: 100 }
+        }
+      )
 
   initialize_mitarbeiter: () ->
     @konfiguration.status = regel.Konfiguration.MITARBEITER_ANZEIGEN

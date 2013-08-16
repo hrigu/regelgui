@@ -12,15 +12,14 @@
     </div>
     <div class="accordion-body collapse">
         <div class="accordion-inner">
-            <div>
-                <div class="regel-content">
-                    <div>Hier ist der Kommentar der Regel der erklärt was das alles denn genau soll</div>
-                </div>
-                <div class="text-right">
-                    <Button class="btn btn-neue-onfiguration">Neue Konfiguration</Button>
-                </div>
-                <hr/>
-                <div class="konfigurationen"></div>
+            <div class="regel-content">
+                <div>Hier ist der Kommentar der Regel der erklärt was das alles denn genau soll</div>
+            </div>
+            <div class="text-right">
+                <Button class="btn btn-neue-onfiguration">Neue Konfiguration</Button>
+            </div>
+            <hr/>
+            <div class="konfigurationen row-fluid">
             </div>
         </div>
     </div>

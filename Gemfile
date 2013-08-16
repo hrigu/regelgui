@@ -40,4 +40,5 @@ group :test do
 end
 
 gem 'js-routes'                   # to make routes available in javascript https://github.com/railsware/js-routes
-gem 'ranked-model'
+gem 'ranked-model'               #sortieren
+gem 'flot-rails'                  #graph
