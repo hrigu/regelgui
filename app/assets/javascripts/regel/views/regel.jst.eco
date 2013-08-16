@@ -18,7 +18,6 @@
             <div class="text-right">
                 <Button class="btn btn-neue-onfiguration">Neue Konfiguration</Button>
             </div>
-            <hr/>
             <div class="konfigurationen row-fluid">
             </div>
         </div>

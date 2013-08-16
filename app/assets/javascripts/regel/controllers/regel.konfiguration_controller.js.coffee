@@ -10,6 +10,8 @@ class regel.KonfigurationController extends Spine.Controller
     ".feedback": "feedback_element"
     ".btn-mitarbeiter-hinzufuegen": "btn_mitarbeiter_hinzufuegen"
     ".gruenorangerot .plot": "gruenorangerot_plot"
+    ".gruenorangerot .input-fields .minimieren": "input_minimieren"
+    ".gruenorangerot .input-fields .maximieren": "input_maximieren"
     #".mitarbeiter": "alle_mitarbeiter"      geht nicht, da dynamisch erstellt
   events:
     "click .btn-mitarbeiter-hinzufuegen": "toggle_alle_mitarbeiter_anzeigen"
@@ -31,6 +33,8 @@ class regel.KonfigurationController extends Spine.Controller
   render: () ->
     html = JST["regel/views/konfiguration"](@konfiguration)
     @replace(html)
+    @input_minimieren.hide() if @konfiguration.auspraegung() == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+    @input_maximieren.hide() if @konfiguration.auspraegung() == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
     @initialize_mitarbeiter()
     @
 
@@ -50,9 +54,11 @@ class regel.KonfigurationController extends Spine.Controller
           @konfiguration.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
       })
     else
-      $.plot(
+      @plot = $.plot(
         @gruenorangerot_plot,
-        [ [[0, 0], [50, 10], [100, 100]] ],
+        [ [[0, @konfiguration.max_value()], [33, @konfiguration.rot1], [66, @konfiguration.orange1], [100, @konfiguration.gruen1]],
+          [[0, 0], [33, @konfiguration.rot2], [66, @konfiguration.orange2], [100, @konfiguration.gruen2]]
+        ],
         {
           xaxis: {
             max: 100
@@ -60,7 +66,7 @@ class regel.KonfigurationController extends Spine.Controller
           }
           yaxis: {
             min: 0
-            max: 100 }
+            max: @konfiguration.max_value() }
         }
       )
 
@@ -101,3 +107,23 @@ class regel.KonfigurationController extends Spine.Controller
     value = parseInt(input.value)
     @konfiguration.updateAttribute(property, value)
 
+    @redraw_plot()
+
+  redraw_plot: ()->
+    data = [
+      [
+        [0, @konfiguration.max_value()],
+        [33, @konfiguration.rot1],
+        [66, @konfiguration.orange1],
+        [100, @konfiguration.gruen1]
+      ],
+      [
+        [0, 0],
+        [33, @konfiguration.rot2],
+        [66, @konfiguration.orange2],
+        [100, @konfiguration.gruen2]
+      ]
+    ]
+
+    @plot.setData(data)
+    @plot.draw()

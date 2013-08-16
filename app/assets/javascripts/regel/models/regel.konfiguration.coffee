@@ -14,9 +14,9 @@ class regel.Konfiguration extends Spine.Model
   @POSITION_KONFIGURATION = "PositionKonfiguration"
   @GRUENORANGEROT_KONFIGURATION = "GruenOrangeRotKonfiguration"
 
-  @AUSPRAEGUNG_MAXIMIEREN = "maximieren"
-  @AUSPRAEGUNG_MINIMIEREN = "minimieren"
-  @AUSPRAEGUNG_EINSCHRAENKEN = "einschraenken"
+  @AUSPRAEGUNG_MAXIMIEREN = "maximieren" # Nur gruen1 orange1 und rot1 gesetzt
+  @AUSPRAEGUNG_MINIMIEREN = "minimieren" # Nur gruen2 orange2 und rot2 gesetzt
+  @AUSPRAEGUNG_EINSCHRAENKEN = "einschraenken" # Alle Werte gesetzt
 
   @KONFIGURATION_VARIANTEN = {
     position_konfiguration_maximieren: {konfiguration: @POSITION_KONFIGURATION, auspraegung: @AUSPRAEGUNG_MAXIMIEREN}
@@ -37,14 +37,29 @@ class regel.Konfiguration extends Spine.Model
     Routes.konfiguration_path(@id)#"regel/#{@id}"
 
 
-  type_as_string: () ->
-    @constructor.name
+  auspraegung: () ->
+    if @type == @POSITION_KONFIGURATION
+      #TODO wie finde ich das raus?
+      @AUSPRAEGUNG_MINIMIEREN
+    else
+      result = switch
+        when @gruen1 == null then regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+        when @gruen2 == null then regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+        else
+          regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+      result
+
+  max_value:()->
+    x = Math.max [@gruen1, @orange1, @rot1, @gruen2, @orange2, @rot2]...
+    x += 20
+    x
 
   ###
   die gesetzten Mitarbeiter
   ###
   mitarbeiter: ->
-    @mitarbeiter_ids.map (id) -> regel.Mitarbeiter.find(id)
+    @mitarbeiter_ids.map (id) ->
+      regel.Mitarbeiter.find(id)
 
   regel: ->
     regel.Regel.find(@regel_id)
@@ -66,10 +81,10 @@ class regel.Konfiguration extends Spine.Model
       return true if m.id == id
     false
 
-   destroy: () ->
-     super
-     @regel().trigger("anzahl_mitarbeiter_geaendert")
-     m.trigger("einer_konfiguration_entfernt", regel: @regel(), konfiguration: @) for m in @mitarbeiter()
+  destroy: () ->
+    super
+    @regel().trigger("anzahl_mitarbeiter_geaendert")
+    m.trigger("einer_konfiguration_entfernt", regel: @regel(), konfiguration: @) for m in @mitarbeiter()
 
 
   toggle_status: () ->
