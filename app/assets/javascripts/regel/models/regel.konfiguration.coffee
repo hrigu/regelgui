@@ -1,8 +1,18 @@
 unless window.regel
   window.regel = {}
 
+###
+  Erweitert Spine.Module um die Möglichkeit, einer spezifischen Instanz Instanzmethoden dynamisch zuzuweisen.
+###
+regel.Module = {
+  include: (obj) ->
+    for key, value of obj
+      @[key] = value
+    this
+}
 
 regel.GruenOrangeRotKonfigurationModule = {
+
   name: () ->
     "GruenOrangeRotKonfiguration"
 
@@ -17,15 +27,27 @@ regel.GruenOrangeRotKonfigurationModule = {
       when @gruen2 == null then regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
       else
         regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-}
+    result
+
+  validate: () ->
+    msg = switch @auspraegung()
+      when regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN, regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+        msg = "grün1 muss kleiner oder gleich orange1 sein" if @gruen1 > @orange1
+        msg = "orange1 muss kleiner oder gleich rot1 sein" if @orange1 > @rot1
+        msg
+      when regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN, regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+        msg = "grün2 muss grösser oder gleich orange2 sein" if @gruen2 < @orange2
+        msg = "orange2 muss grösser oder gleich rot2 sein" if @orange2 < @rot2
+        msg
+    msg
+} # end module
 
 regel.PositionKonfigurationModule = {
   name: () ->
     "PositionKonfiguration"
 
   auspraegung: () ->
-    #TODO wie finde ich das raus?
-    @AUSPRAEGUNG_MINIMIEREN
+    regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
 }
 
 ###
@@ -34,6 +56,7 @@ Das Konfigurationsmodell
 class regel.Konfiguration extends Spine.Model
   @configure "Konfiguration", "id", "name", "type", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen1", "orange1", "rot1", "gruen2", "orange2", "rot2"
   @extend Spine.Model.Ajax
+  @include regel.Module
 
   @MITARBEITER_ANZEIGEN = "mitarbeiter_anzeigen"
   @MITARBEITER_BEARBEITEN = "mitarbeiter_bearbeiten"
@@ -58,9 +81,9 @@ class regel.Konfiguration extends Spine.Model
     super
 
     if @type == regel.Konfiguration.POSITION_KONFIGURATION
-      regel.Konfiguration.include regel.PositionKonfigurationModule
+      @include regel.PositionKonfigurationModule
     else
-      regel.Konfiguration.include regel.GruenOrangeRotKonfigurationModule
+      @include regel.GruenOrangeRotKonfigurationModule
 
   @url: ->
     Routes.konfigurationen_path()
@@ -109,14 +132,3 @@ class regel.Konfiguration extends Spine.Model
 
   is_status_mitarbeiter_bearbeiten: () ->
     @status == regel.Konfiguration.MITARBEITER_BEARBEITEN
-
-
-class regel.PositionKonfiguration extends regel.Konfiguration
-  constructor: (args)->
-    args.type = regel.Konfiguration.POSITION_KONFIGURATION
-    super
-
-class regel.GruenOrangeRotKonfiguration extends regel.Konfiguration
-  constructor: (args)->
-    args.type = regel.Konfiguration.GRUENORANGEROT_KONFIGURATION
-    super

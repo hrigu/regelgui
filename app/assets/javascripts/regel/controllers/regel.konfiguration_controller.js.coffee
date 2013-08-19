@@ -26,6 +26,10 @@ class regel.KonfigurationController extends Spine.Controller
           @feedback_element.fadeTo("fast", 1)
         );
 
+    @konfiguration.bind "error", (rec, msg) ->
+      alert msg
+
+
   render: () ->
     html = JST["regel/views/konfiguration"](@konfiguration)
     @replace(html)
