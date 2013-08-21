@@ -15,7 +15,7 @@
   // // width: 150px; height: 40px; padding: 0.5em;
   //}
 
-  div .mitarbeiter{
+  div .mitarbeiter {
     border: 1px solid #82A0B6;
     border-radius: 0.2em;
     display: inline-block;
@@ -23,25 +23,25 @@
     margin: 0.1em 0;
     color: #000000;
     //white: #FFF;
-    &.zugeordnet{
+    &.zugeordnet {
       background: #E8F0FF;
     }
-    &.anderer-konfiguration-zugeordnet{
+    &.anderer-konfiguration-zugeordnet {
       background: #ffeaf2;
     }
-    &.frei{
+    &.frei {
       background: #ffffff;
     }
   }
 
-  .gruenorangerot{
-    .plot{
+  .gruenorangerot {
+    .plot {
       background-color: #dbffd0;
-      width:280px;
-      height:160px;
+      width: 280px;
+      height: 160px;
     }
     .input-fields {
-    //  padding-left: 65px;
+      //  padding-left: 65px;
       padding-top: 10px;
     }
     .rot {
@@ -55,9 +55,72 @@
     }
   }
 
-  .konfiguration{
+  .konfiguration {
     border-top: 1px solid #82A0B6;;
     padding-top: 10px;
+
+    .position {
+      .input-element {
+        margin-top: 1.5em;
+        width: 85%;
+        .slider {
+
+        }
+        .slider_farben {
+          width: 100%;
+          float: left;
+          height: 4em;
+          margin-top: -2.5em;
+          .rot,
+          .rot_orange,
+          .orange,
+          .orange_gruen,
+          .gruen {
+            background: #d1ead0;
+            height: 4em;
+            float: left;
+            width: 20%;
+          }
+
+          .orange_gruen {
+            background: #ffddba;
+            background-image: linear-gradient(to right, #ffddba, #d1ead0);
+          }
+
+          .orange {
+            background: #ffddba;
+          }
+
+          .rot_orange {
+            background: #f4a192;
+            background-image: linear-gradient(to right, #f4a192, #ffddba);
+          }
+
+          .rot {
+            background: #f4a192;
+          }
+        }
+        .slider_beschriftung {
+          float: left;
+          padding-top: 0.2em;
+          width: 100%;
+          .gruen{
+          }
+
+          .rot{
+            float: right
+
+          }
+
+        }
+      }
+      .slider_wert {
+        float: right;
+      }
+
+
+    }
+
   }
 
   //div .span1{
