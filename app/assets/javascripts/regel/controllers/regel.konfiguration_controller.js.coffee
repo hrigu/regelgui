@@ -29,6 +29,9 @@ class regel.KonfigurationController extends Spine.Controller
     @konfiguration.bind "error", (rec, msg) ->
       alert msg
 
+    @konfiguration.bind "id_changed", (rec, other) =>
+      _this.el.attr("data-konfiguration_id", rec.id)
+
 
   render: () ->
     html = JST["regel/views/konfiguration"](@konfiguration)

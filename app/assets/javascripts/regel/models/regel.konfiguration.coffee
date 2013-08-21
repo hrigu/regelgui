@@ -91,6 +91,12 @@ class regel.Konfiguration extends Spine.Model
   url: (options)->
     Routes.konfiguration_path(@id)#"regel/#{@id}"
 
+  changeID:(id_neu) ->
+    old_id = @id
+    super(id_neu)
+    @trigger("id_changed", {old_id: old_id})
+
+
   ###
   die gesetzten Mitarbeiter
   ###

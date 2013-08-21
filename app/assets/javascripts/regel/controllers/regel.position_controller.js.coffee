@@ -21,8 +21,9 @@ class regel.PositionController extends Spine.Controller
       max: 100,
       range: "min",
       value: @konfiguration.gruenorangerot_position_100,
-    #      slide: (event, ui) ->
-    #        $("#gruenorangerot_position_100_" + regel.id).text(ui.value)
+      slide: (event, ui) =>
+        selector = "*[data-konfiguration_id =\"#{@konfiguration.id}\"] .slider_wert span"
+        $(selector).text(ui.value)
       stop: (event, ui) =>
         @konfiguration.updateAttribute("gruenorangerot_position_100", ui.value) # {ajax: false}
     })
