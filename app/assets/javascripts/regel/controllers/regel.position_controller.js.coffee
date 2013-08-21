@@ -38,7 +38,9 @@ class regel.PositionController extends Spine.Controller
           }
           yaxis: {
             min: 0
-            max: 5 }
+            max: 5
+            ticks: [] #keine
+          }
         }
     )
 
@@ -50,5 +52,5 @@ class regel.PositionController extends Spine.Controller
     @plot.draw()
 
   values: (current_value) ->
-    [ [[0, 4], [current_value, 4],[current_value, 1], [100, 1]]
+    [ [[0, @konfiguration.start_value()], [current_value, @konfiguration.start_value()],[current_value, @konfiguration.end_value()], [100, @konfiguration.end_value()]]
     ]

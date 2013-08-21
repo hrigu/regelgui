@@ -14,6 +14,8 @@
 ActiveRecord::Schema.define(:version => 20130807120230) do
 
   create_table "konfigurationen", :force => true do |t|
+    t.string   "type"
+    t.string   "auspraegung"
     t.integer  "gruen1"
     t.integer  "orange1"
     t.integer  "rot1"
@@ -21,7 +23,6 @@ ActiveRecord::Schema.define(:version => 20130807120230) do
     t.integer  "orange2"
     t.integer  "rot2"
     t.integer  "gruenorangerot_position"
-    t.string   "type"
     t.integer  "regel_id"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false

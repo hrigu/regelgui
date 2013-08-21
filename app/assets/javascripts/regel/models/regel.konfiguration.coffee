@@ -17,20 +17,17 @@ regel.GruenOrangeRotKonfigurationModule = {
     "GruenOrangeRotKonfiguration"
 
   max_value: ()->
-    x = Math.max [@gruen1, @orange1, @rot1, @gruen2, @orange2, @rot2]...
+    values = []
+    if @auspraegung == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN or  @auspraegung == regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+      values.push(@gruen1, @orange1, @rot1)
+    if @auspraegung == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN or  @auspraegung == regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+      values.push(@gruen2, @orange2, @rot2)
+    x = Math.max values...
     x += 20
     x
 
-  auspraegung: () ->
-    result = switch
-      when @gruen1 == null then regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
-      when @gruen2 == null then regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
-      else
-        regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-    result
-
   validate: () ->
-    msg = switch @auspraegung()
+    msg = switch @auspraegung
       when regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN, regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
         msg = "grün1 muss kleiner oder gleich orange1 sein" if @gruen1 > @orange1
         msg = "orange1 muss kleiner oder gleich rot1 sein" if @orange1 > @rot1
@@ -46,15 +43,28 @@ regel.PositionKonfigurationModule = {
   name: () ->
     "PositionKonfiguration"
 
-  auspraegung: () ->
-    regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+  start_value: () ->
+    value = switch @auspraegung
+      when regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+        4
+      when regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+        1
+    value
+
+  end_value: () ->
+    value = switch @auspraegung
+      when regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+        1
+      when regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+        4
+    value
 }
 
 ###
 Das Konfigurationsmodell
 ###
 class regel.Konfiguration extends Spine.Model
-  @configure "Konfiguration", "id", "name", "type", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen1", "orange1", "rot1", "gruen2", "orange2", "rot2"
+  @configure "Konfiguration", "id", "name", "type", "auspraegung", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen1", "orange1", "rot1", "gruen2", "orange2", "rot2"
   @extend Spine.Model.Ajax
   @include regel.Module
 

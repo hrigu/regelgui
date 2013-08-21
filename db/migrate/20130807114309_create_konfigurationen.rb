@@ -1,6 +1,8 @@
 class CreateKonfigurationen < ActiveRecord::Migration
   def change
     create_table :konfigurationen do |t|
+      t.string :type       #GruenOrangeRotKonfiguration oder PositionKonfiguration
+      t.string :auspraegung #minimieren, maximieren oder einschraenken
       t.integer :gruen1
       t.integer :orange1
       t.integer :rot1
@@ -8,7 +10,6 @@ class CreateKonfigurationen < ActiveRecord::Migration
       t.integer :orange2
       t.integer :rot2
       t.integer :gruenorangerot_position
-      t.string :type
       t.integer :regel_id
 
       t.timestamps

@@ -19,8 +19,8 @@ class regel.GruenOrangeRotController extends Spine.Controller
   render: () ->
     html = JST["regel/views/gruenorangerot"](@konfiguration)
     @replace(html)
-    @input_minimieren.hide() if @konfiguration.auspraegung() == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
-    @input_maximieren.hide() if @konfiguration.auspraegung() == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+    @input_minimieren.hide() if @konfiguration.auspraegung == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+    @input_maximieren.hide() if @konfiguration.auspraegung == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
     @
 
   ###

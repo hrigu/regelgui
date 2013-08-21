@@ -1,6 +1,8 @@
 class Konfiguration < ActiveRecord::Base
-  attr_accessible :type, :regel_id, :regel,  :mitarbeiter,  :mitarbeiter_ids
-  attr_accessible :gruen1, :gruen2, :orange1, :orange2, :rot1, :rot2
+  attr_accessible :type, :auspraegung
+  attr_accessible :regel_id, :regel,  :mitarbeiter,  :mitarbeiter_ids
+  attr_accessible :gruen1, :orange1, :rot1,
+                  :gruen2, :orange2, :rot2
   attr_accessible :gruenorangerot_position, :gruenorangerot_position_100
 
 
