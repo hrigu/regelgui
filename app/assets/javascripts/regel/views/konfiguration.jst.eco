@@ -1,8 +1,8 @@
 <div class="konfiguration row-fluid" data-konfiguration_id="<%=@id%>">
     <!--TODO regelgui: Warum kann man hier nur 11 Grideinheiten vergeben?-->
     <!--div class="span1 feedback"></div-->
-    <div class="span5 konfiguration-value"></div>
-    <div class="span1">Text</div>
+    <div class="span4 konfiguration-value"></div>
+    <div class="span2">Text</div>
     <div class="span5">
         <div class="mitarbeiterliste"></div>
     </div>

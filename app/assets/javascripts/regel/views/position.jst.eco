@@ -1,19 +1,9 @@
 <div class="position">
+    <div class="plot"></div>
+
     <div class=input-element>
         <div class="slider"></div>
-        <div class="slider_farben">
-            <div class="rot"></div>
-            <div class="rot_orange"></div>
-            <div class="orange"></div>
-            <div class="orange_gruen"></div>
-            <div class="gruen"></div>
-        </div>
-        <div class="slider_beschriftung">
-            <div class="gruen">wichtig</div>
-            <div class="orange"></div>
-            <div class="rot">unwichtig</div>
-        </div>
     </div>
-    <div class="slider_wert"><span><%=@gruenorangerot_position_100%></span>%</div>
+    <div class="slider_wert"><span><%=@gruenorangerot_position_100%></span></div>
 </div>
 
