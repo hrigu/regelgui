@@ -27,16 +27,32 @@ regel.GruenOrangeRotKonfigurationModule = {
     x
 
   validate: () ->
-    msg = switch @auspraegung
-      when regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN, regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-        msg = "grün1 muss kleiner oder gleich orange1 sein" if @gruen1 > @orange1
-        msg = "orange1 muss kleiner oder gleich rot1 sein" if @orange1 > @rot1
-        msg
-      when regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN, regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-        msg = "grün2 muss grösser oder gleich orange2 sein" if @gruen2 < @orange2
-        msg = "orange2 muss grösser oder gleich rot2 sein" if @orange2 < @rot2
-        msg
-    msg
+    msgs = []
+    switch @auspraegung
+      when regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN
+        @validate_minimieren(msgs)
+      when regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN
+        @validate_maximieren(msgs)
+      when regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
+        @validate_minimieren(msgs)
+        @validate_maximieren(msgs)
+        @validate_einschraenken(msgs)
+    if msgs.length > 0 then msgs else null
+
+  validate_minimieren: (msgs) ->
+    msgs.push "grün1 muss kleiner oder gleich orange1 sein" if @gruen1 > @orange1
+    msgs.push "orange1 muss kleiner oder gleich rot1 sein" if @orange1 > @rot1
+
+  validate_maximieren: (msgs) ->
+    msgs.push "grün2 muss grösser oder gleich orange2 sein" if @gruen2 < @orange2
+    msgs.push "orange2 muss grösser oder gleich rot2 sein" if @orange2 < @rot2
+
+  validate_einschraenken: (msgs) ->
+    msgs.push "grün1 muss grösser oder gleich grün2 sein" if @gruen1 < @gruen2
+    msgs.push "orange1 muss grösser oder gleich orange2 sein" if @orange1 < @orange2
+    msgs.push "rot1 muss grösser oder gleich rot2 sein" if @rot1 < @rot2
+
+
 } # end module
 
 regel.PositionKonfigurationModule = {
