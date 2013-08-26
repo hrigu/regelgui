@@ -19,9 +19,9 @@ regel.GruenOrangeRotKonfigurationModule = {
   max_value: ()->
     values = []
     if @auspraegung == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN or  @auspraegung == regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-      values.push(@gruen1, @orange1, @rot1)
+      values.push(@gruen_untere_grenze, @orange_untere_grenze, @rot_untere_grenze)
     if @auspraegung == regel.Konfiguration.AUSPRAEGUNG_MAXIMIEREN or  @auspraegung == regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
-      values.push(@gruen2, @orange2, @rot2)
+      values.push(@gruen_obere_grenze, @orange_obere_grenze, @rot_obere_grenze)
     x = Math.max values...
     x += 20
     x
@@ -40,17 +40,17 @@ regel.GruenOrangeRotKonfigurationModule = {
     if msgs.length > 0 then msgs else null
 
   validate_minimieren: (msgs) ->
-    msgs.push "grün1 muss kleiner oder gleich orange1 sein" if @gruen1 > @orange1
-    msgs.push "orange1 muss kleiner oder gleich rot1 sein" if @orange1 > @rot1
+    msgs.push "grün_untere_grenze muss kleiner oder gleich orange_untere_grenze sein" if @gruen_untere_grenze > @orange_untere_grenze
+    msgs.push "orange_untere_grenze muss kleiner oder gleich rot_untere_grenze sein" if @orange_untere_grenze > @rot_untere_grenze
 
   validate_maximieren: (msgs) ->
-    msgs.push "grün2 muss grösser oder gleich orange2 sein" if @gruen2 < @orange2
-    msgs.push "orange2 muss grösser oder gleich rot2 sein" if @orange2 < @rot2
+    msgs.push "grün_obere_grenze muss grösser oder gleich orange_obere_grenze sein" if @gruen_obere_grenze < @orange_obere_grenze
+    msgs.push "orange_obere_grenze muss grösser oder gleich rot_obere_grenze sein" if @orange_obere_grenze < @rot_obere_grenze
 
   validate_einschraenken: (msgs) ->
-    msgs.push "grün1 muss grösser oder gleich grün2 sein" if @gruen1 < @gruen2
-    msgs.push "orange1 muss grösser oder gleich orange2 sein" if @orange1 < @orange2
-    msgs.push "rot1 muss grösser oder gleich rot2 sein" if @rot1 < @rot2
+    msgs.push "grün_untere_grenze muss grösser oder gleich grün_obere_grenze sein" if @gruen_untere_grenze < @gruen_obere_grenze
+    msgs.push "orange_untere_grenze muss grösser oder gleich orange_obere_grenze sein" if @orange_untere_grenze < @orange_obere_grenze
+    msgs.push "rot_untere_grenze muss grösser oder gleich rot_obere_grenze sein" if @rot_untere_grenze < @rot_obere_grenze
 
 
 } # end module
@@ -80,7 +80,7 @@ regel.PositionKonfigurationModule = {
 Das Konfigurationsmodell
 ###
 class regel.Konfiguration extends Spine.Model
-  @configure "Konfiguration", "id", "name", "type", "auspraegung", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen1", "orange1", "rot1", "gruen2", "orange2", "rot2"
+  @configure "Konfiguration", "id", "name", "type", "auspraegung", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen_untere_grenze", "orange_untere_grenze", "rot_untere_grenze", "gruen_obere_grenze", "orange_obere_grenze", "rot_obere_grenze"
   @extend Spine.Model.Ajax
   @include regel.Module
 
@@ -90,9 +90,9 @@ class regel.Konfiguration extends Spine.Model
   @POSITION_KONFIGURATION = "PositionKonfiguration"
   @GRUENORANGEROT_KONFIGURATION = "GruenOrangeRotKonfiguration"
 
-  @AUSPRAEGUNG_MAXIMIEREN = "maximieren" # Nur gruen1 orange1 und rot1 gesetzt
-  @AUSPRAEGUNG_MINIMIEREN = "minimieren" # Nur gruen2 orange2 und rot2 gesetzt
-  @AUSPRAEGUNG_EINSCHRAENKEN = "einschraenken" # Alle Werte gesetzt
+  @AUSPRAEGUNG_MAXIMIEREN = "maximieren"
+  @AUSPRAEGUNG_MINIMIEREN = "minimieren"
+  @AUSPRAEGUNG_EINSCHRAENKEN = "einschraenken"
 
   @KONFIGURATION_VARIANTEN = {
     position_konfiguration_maximieren: {konfiguration: @POSITION_KONFIGURATION, auspraegung: @AUSPRAEGUNG_MAXIMIEREN}

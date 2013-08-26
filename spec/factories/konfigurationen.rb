@@ -2,12 +2,12 @@
 
 FactoryGirl.define do
   factory :konfiguration do
-    gruen1 1
-    orange1 1
-    rot1 1
-    gruen2 1
-    orange2 1
-    rot2 1
+    gruen_untere_grenze 1
+    orange_untere_grenze 1
+    rot_untere_grenze 1
+    gruen_obere_grenze 1
+    orange_obere_grenze 1
+    rot_obere_grenze 1
     gruenorangerot_position 1
     type ""
   end

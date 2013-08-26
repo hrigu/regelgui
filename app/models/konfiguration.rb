@@ -1,8 +1,8 @@
 class Konfiguration < ActiveRecord::Base
   attr_accessible :type, :auspraegung
   attr_accessible :regel_id, :regel,  :mitarbeiter,  :mitarbeiter_ids
-  attr_accessible :gruen1, :orange1, :rot1,
-                  :gruen2, :orange2, :rot2
+  attr_accessible :gruen_untere_grenze, :orange_untere_grenze, :rot_untere_grenze,
+                  :gruen_obere_grenze, :orange_obere_grenze, :rot_obere_grenze
   attr_accessible :gruenorangerot_position, :gruenorangerot_position_100
 
 

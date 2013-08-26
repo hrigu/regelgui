@@ -3,12 +3,12 @@ class CreateKonfigurationen < ActiveRecord::Migration
     create_table :konfigurationen do |t|
       t.string :type       #GruenOrangeRotKonfiguration oder PositionKonfiguration
       t.string :auspraegung #minimieren, maximieren oder einschraenken
-      t.integer :gruen1
-      t.integer :orange1
-      t.integer :rot1
-      t.integer :gruen2
-      t.integer :orange2
-      t.integer :rot2
+      t.integer :gruen_untere_grenze
+      t.integer :orange_untere_grenze
+      t.integer :rot_untere_grenze
+      t.integer :gruen_obere_grenze
+      t.integer :orange_obere_grenze
+      t.integer :rot_obere_grenze
       t.integer :gruenorangerot_position
       t.integer :regel_id
 

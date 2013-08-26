@@ -3,15 +3,15 @@
     <div class="input-fields">
         <div class="minimieren">
             minimieren:
-            <input data-property="rot1" class="input-mini rot" type="text" value="<%= @rot1 %>">
-            <input data-property="orange1" class="input-mini orange" type="text" value="<%= @orange1 %>">
-            <input data-property="gruen1" class="input-mini  gruen" type="text" value="<%= @gruen1 %>">
+            <input data-property="rot_untere_grenze" class="input-mini rot" type="text" value="<%= @rot_untere_grenze %>">
+            <input data-property="orange_untere_grenze" class="input-mini orange" type="text" value="<%= @orange_untere_grenze %>">
+            <input data-property="gruen_untere_grenze" class="input-mini  gruen" type="text" value="<%= @gruen_untere_grenze %>">
         </div>
         <div class="maximieren">
             maximieren:
-            <input data-property="rot2" class="input-mini rot" type="text" value="<%= @rot2 %>">
-            <input data-property="orange2" class="input-mini orange" type="text" value="<%= @orange2 %>">
-            <input data-property="gruen2" class="input-mini  gruen" type="text" value="<%= @gruen2 %>">
+            <input data-property="rot_obere_grenze" class="input-mini rot" type="text" value="<%= @rot_obere_grenze %>">
+            <input data-property="orange_obere_grenze" class="input-mini orange" type="text" value="<%= @orange_obere_grenze %>">
+            <input data-property="gruen_obere_grenze" class="input-mini  gruen" type="text" value="<%= @gruen_obere_grenze %>">
         </div>
     </div>
 </div>

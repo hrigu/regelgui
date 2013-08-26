@@ -54,6 +54,6 @@ class regel.GruenOrangeRotController extends Spine.Controller
     @plot.draw()
 
   values: () ->
-    [ [[0, @konfiguration.max_value()], [33, @konfiguration.rot1], [66, @konfiguration.orange1], [100, @konfiguration.gruen1]],
-      [[0, 0], [33, @konfiguration.rot2], [66, @konfiguration.orange2], [100, @konfiguration.gruen2]]
+    [ [[0, @konfiguration.max_value()], [33, @konfiguration.rot_untere_grenze], [66, @konfiguration.orange_untere_grenze], [100, @konfiguration.gruen_untere_grenze]],
+      [[0, 0], [33, @konfiguration.rot_obere_grenze], [66, @konfiguration.orange_obere_grenze], [100, @konfiguration.gruen_obere_grenze]]
     ]
