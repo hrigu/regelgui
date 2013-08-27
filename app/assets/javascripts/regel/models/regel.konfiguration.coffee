@@ -13,9 +13,6 @@ regel.Module = {
 
 regel.GruenOrangeRotKonfigurationModule = {
 
-  name: () ->
-    "GruenOrangeRotKonfiguration"
-
   max_value: ()->
     values = []
     if @auspraegung == regel.Konfiguration.AUSPRAEGUNG_MINIMIEREN or  @auspraegung == regel.Konfiguration.AUSPRAEGUNG_EINSCHRAENKEN
@@ -56,8 +53,6 @@ regel.GruenOrangeRotKonfigurationModule = {
 } # end module
 
 regel.PositionKonfigurationModule = {
-  name: () ->
-    "PositionKonfiguration"
 
   start_value: () ->
     value = switch @auspraegung
@@ -80,7 +75,7 @@ regel.PositionKonfigurationModule = {
 Das Konfigurationsmodell
 ###
 class regel.Konfiguration extends Spine.Model
-  @configure "Konfiguration", "id", "name", "typ", "auspraegung", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen_untere_grenze", "orange_untere_grenze", "rot_untere_grenze", "gruen_obere_grenze", "orange_obere_grenze", "rot_obere_grenze"
+  @configure "Konfiguration", "id", "typ", "auspraegung", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen_untere_grenze", "orange_untere_grenze", "rot_untere_grenze", "gruen_obere_grenze", "orange_obere_grenze", "rot_obere_grenze"
   @extend Spine.Model.Ajax
   @include regel.Module
 

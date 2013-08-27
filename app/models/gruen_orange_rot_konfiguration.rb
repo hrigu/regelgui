@@ -1,2 +1,0 @@
-class GruenOrangeRotKonfiguration < Konfiguration
-end
