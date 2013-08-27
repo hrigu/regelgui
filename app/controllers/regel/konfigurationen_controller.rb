@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 
-class KonfigurationenController < ApplicationController
+class Regel::KonfigurationenController < ApplicationController
 
   respond_to :json
 
   #TODO regelgui: Nur die Felder raufschicken, die nötig sind. Also die grünorangerot felder weglassen
   def index
-    all =  Regel::Konfiguration.all
+    all = Regel::Konfiguration.all
     render json: all, methods: [:gruenorangerot_position_100, :typ, :mitarbeiter_ids]
   end
 

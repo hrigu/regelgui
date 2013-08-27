@@ -9,10 +9,10 @@ class regel.Regel extends Spine.Model
   @extend Spine.Model.Ajax
 
   @url: ->
-    Routes.regeln_path()#"regeln"
+    Routes.regel_regeln_path()#"regeln"
 
   url: (options)->
-    Routes.regel_path(@id)#"regel/#{@id}"
+    Routes.regel_regel_path(@id)#"regel/#{@id}"
 
   ###
   Alle Mitarbeiter, ob gesetzt oder nicht. (Fuer alle Regeln gleich)

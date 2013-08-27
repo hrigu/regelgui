@@ -1,4 +1,4 @@
-class MitarbeiterController < ApplicationController
+class Regel::MitarbeiterController < ApplicationController
 
   respond_to :json
 
@@ -6,5 +6,6 @@ class MitarbeiterController < ApplicationController
     respond_with Mitarbeiter.all
   end
 end
+
 
 

@@ -1,4 +1,4 @@
-class RegelnController < ApplicationController
+class Regel::RegelnController < ApplicationController
 
   respond_to :json, :except => [:index]
 

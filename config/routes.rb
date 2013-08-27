@@ -7,8 +7,9 @@ Regelgui::Application.routes.draw do
   devise_for :users
   resources :users
 
-  resources :regeln
-  resources :konfigurationen
-  resources :position_konfigurationen
-  resources :mitarbeiter
+  scope "/regel", module: "regel", as: "regel" do
+    resources :regeln
+    resources :konfigurationen
+    resources :mitarbeiter
+  end
 end

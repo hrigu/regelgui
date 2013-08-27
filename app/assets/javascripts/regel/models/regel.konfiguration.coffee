@@ -107,10 +107,10 @@ class regel.Konfiguration extends Spine.Model
       @include regel.GruenOrangeRotKonfigurationModule
 
   @url: ->
-    Routes.konfigurationen_path()
+    Routes.regel_konfigurationen_path()
 
   url: (options)->
-    Routes.konfiguration_path(@id)#"regel/#{@id}"
+    Routes.regel_konfiguration_path(@id)#"regel/#{@id}"
 
   changeID:(id_neu) ->
     old_id = @id
