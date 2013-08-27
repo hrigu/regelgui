@@ -42,7 +42,7 @@ class regel.KonfigurationController extends Spine.Controller
 
   initialize_konfiguration_value: () ->
     graphik_controller = null
-    if @konfiguration.type == regel.Konfiguration.POSITION_KONFIGURATION
+    if @konfiguration.typ == regel.Konfiguration.POSITION_KONFIGURATION
       graphik_controller = new regel.PositionController(regel: @regel, konfiguration: @konfiguration)
     else
       graphik_controller = new regel.GruenOrangeRotController(regel: @regel, konfiguration: @konfiguration)

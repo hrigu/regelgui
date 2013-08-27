@@ -11,6 +11,8 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'variable', 'variablen'
   inflect.irregular 'regel', 'regeln'
   inflect.irregular 'konfiguration', 'konfigurationen'
+  inflect.irregular 'konfigurationstyp', 'konfigurationstypen'
+
 end
 #
 # These inflection rules are supported but not enabled by default:

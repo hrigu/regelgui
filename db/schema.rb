@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807120230) do
+ActiveRecord::Schema.define(:version => 20130826125230) do
 
   create_table "konfigurationen", :force => true do |t|
-    t.string   "type"
+    t.integer  "konfigurationstyp_id"
     t.string   "auspraegung"
     t.integer  "gruen_untere_grenze"
     t.integer  "orange_untere_grenze"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(:version => 20130807120230) do
   create_table "konfigurationen_mitarbeiter", :force => true do |t|
     t.integer "konfiguration_id"
     t.integer "mitarbeiter_id"
+  end
+
+  create_table "konfigurationstypen", :force => true do |t|
+    t.string "schluessel", :limit => 45, :null => false
+    t.string "name",       :limit => 45, :null => false
   end
 
   create_table "mitarbeiter", :force => true do |t|

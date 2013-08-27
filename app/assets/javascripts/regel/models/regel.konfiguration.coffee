@@ -80,15 +80,15 @@ regel.PositionKonfigurationModule = {
 Das Konfigurationsmodell
 ###
 class regel.Konfiguration extends Spine.Model
-  @configure "Konfiguration", "id", "name", "type", "auspraegung", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen_untere_grenze", "orange_untere_grenze", "rot_untere_grenze", "gruen_obere_grenze", "orange_obere_grenze", "rot_obere_grenze"
+  @configure "Konfiguration", "id", "name", "typ", "auspraegung", "gruenorangerot_position_100", "regel_id", "mitarbeiter_ids", "gruen_untere_grenze", "orange_untere_grenze", "rot_untere_grenze", "gruen_obere_grenze", "orange_obere_grenze", "rot_obere_grenze"
   @extend Spine.Model.Ajax
   @include regel.Module
 
   @MITARBEITER_ANZEIGEN = "mitarbeiter_anzeigen"
   @MITARBEITER_BEARBEITEN = "mitarbeiter_bearbeiten"
 
-  @POSITION_KONFIGURATION = "PositionKonfiguration"
-  @GRUENORANGEROT_KONFIGURATION = "GruenOrangeRotKonfiguration"
+  @POSITION_KONFIGURATION = "POSITION"
+  @GRUENORANGEROT_KONFIGURATION = "GRUENORANGEROT"
 
   @AUSPRAEGUNG_MAXIMIEREN = "maximieren"
   @AUSPRAEGUNG_MINIMIEREN = "minimieren"
@@ -106,7 +106,7 @@ class regel.Konfiguration extends Spine.Model
     @status = regel.Konfiguration.MITARBEITER_ANZEIGEN
     super
 
-    if @type == regel.Konfiguration.POSITION_KONFIGURATION
+    if @typ== regel.Konfiguration.POSITION_KONFIGURATION
       @include regel.PositionKonfigurationModule
     else
       @include regel.GruenOrangeRotKonfigurationModule

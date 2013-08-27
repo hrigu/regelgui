@@ -1,5 +1,5 @@
 class Konfiguration < ActiveRecord::Base
-  attr_accessible :type, :auspraegung
+  attr_accessible :typ, :auspraegung
   attr_accessible :regel_id, :regel,  :mitarbeiter,  :mitarbeiter_ids
   attr_accessible :gruen_untere_grenze, :orange_untere_grenze, :rot_untere_grenze,
                   :gruen_obere_grenze, :orange_obere_grenze, :rot_obere_grenze
@@ -8,6 +8,10 @@ class Konfiguration < ActiveRecord::Base
 
   belongs_to :regel
   has_and_belongs_to_many :mitarbeiter
+  belongs_to :konfigurationstyp
+
+
+  validates_presence_of :konfigurationstyp
 
 
   def gruenorangerot_position_100
@@ -16,6 +20,14 @@ class Konfiguration < ActiveRecord::Base
 
   def gruenorangerot_position_100=(value)
     self.gruenorangerot_position = value * 30 if value
+  end
+
+  def typ
+    konfigurationstyp.schluessel
+  end
+
+  def typ= schluessel
+    self.konfigurationstyp = Konfigurationstyp.konfigurationstyp_for schluessel
   end
 
 end

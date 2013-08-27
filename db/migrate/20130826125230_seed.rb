@@ -30,6 +30,9 @@ class Seed < ActiveRecord::Migration
     r = Regel.create(name: "Innerhalb von 5 Tagen mindestens 1 D1", sort_order: 2, ist_aktiv: true, zeitfenster: 5, grenze_minimum: 1, variable: Variable.where(name: "Anzahl D1").first)
     r = Regel.create(name: "Innerhalb von 10 Tagen höchstens 4 D1", sort_order: 3, ist_aktiv: true, zeitfenster: 10, grenze_maximum: 4, variable: Variable.where(name: "Anzahl D1").first)
 
+    Konfigurationstyp.create(schluessel: "POSITION", name: "position")
+    Konfigurationstyp.create(schluessel: "GRUENORANGEROT", name: "gruenorangerot")
+
     #Konfigurationen
     #- PositionKonfiguration "Relevanz einstellen" -> Slider "An einem bestimmten Punkt die Anzahl Verletzungen minimieren"
     #PositionKonfiguration.create(gruenorangerot_position: 1000, regel: regel1, mitarbeiter: [Mitarbeiter.first, Mitarbeiter.all[2]])
